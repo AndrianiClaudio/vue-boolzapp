@@ -1,0 +1,93 @@
+:root {
+    --header-height: 60px;
+    --header-menu-width: 300px;
+    --min-header-msg-menu-width: 400px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 100%;
+}
+
+/* --HEADER */
+header.header {
+    position: sticky;
+    display: flex;
+    min-width: calc(var(--header-menu-width) + var(--min-header-msg-menu-width));
+    height: var(--header-height);
+    background-color: lightgrey;
+}
+header.header > * {
+    max-height: 100%;
+}
+/* avatar */
+img.header-avatar {
+    height: var(--header-height);
+    padding: 0.4rem;
+}
+/* header icon */
+.header-icon {
+    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+}
+.header-icon > i {
+    justify-self: flex-end;
+    color: darkgray;
+    cursor: pointer;
+}
+/* --#header-menu: MENU SX */
+#header-menu {
+    /* background-color: green; */
+    display: flex;
+    justify-content: space-between;
+    width: var(--header-menu-width);
+}
+/* user container */
+.user-info {
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+}
+/* --#header-msg-menu: MENU DX */
+#header-msg-menu {
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    min-width: var(--min-header-msg-menu-width);
+    border-left: 2px solid darkgrey;
+}
+.friend-info {
+    display: flex;
+    align-items: center;
+}
+/* --FINE HEADER */
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+.underline {
+    text-decoration: underline solid darkgrey;
+}
+
+/* MAIN CONTENT SX: LISTA MESSAGGI */
+#msg-list-container {
+    overflow-y: auto;
+    /* min-height: 200px; */
+    display: flex;
+    flex-direction: column;
+    width: var(--header-menu-width);
+    background-color: violet;
+    height: calc(100vh - var(--header-height));
+    gap: 0.5rem;
+}
