@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 <body>
+    <div class="container-bg-top"></div>
+    <div class="container-bg-bottom"></div>
     <div id="container">
         <!-- header -->
         <header class="header">
@@ -51,11 +53,11 @@
         <!-- lista messaggi sinistra -->
         <main class="main">
             <section id="msg-list-container">
-                <div id="notifications-container">
+                <div id="notifications-container" class="clicked">
                     <i class="far fa-bell-slash"></i>
                     <div class="flex-column">
-                        <span>Messaggi</span>
-                        <span class= 'underline'>Attiva notifiche</span>
+                        <span>Ricevi notifiche di nuovi messaggi</span>
+                        <span class= 'underline-grey'>Attiva notifiche dekstop</span>
                     </div>
                 </div>
                 <div id="input-search">
@@ -96,12 +98,17 @@
                 </ul>
             </section>
             <div id="chat-container">
-    
+                <main>
+
+                </main>
+                <footer class="footer-chat">
+                    <i class="far fa-smile"></i>
+                    <input type="text" placeholder="Scrivi un messaggio">
+                    <i class="fas fa-microphone"></i>
+                </footer>
             </div>
         </main>
     </div>
-    <div class="container-bg-top"></div>
-    <div class="container-bg-bottom"></div>
     <!-- mine js -->
     <script src="js/script.js"></script>
 </body>
