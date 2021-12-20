@@ -15,84 +15,93 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 <body>
-    <!-- header -->
-    <header class="header">
-        <!-- menu lato sx -->
-        <div id= 'header-menu'>
-            <!-- contenitore user info -->
-            <div class="user-info">
-                <img src="IMG/avatar_1.jpg" class="header-avatar" alt="">
-                <strong>Nome Utente</strong>
-            </div>
-            <!-- contenitore icone  -->
-            <div class="header-icon">
-                <i class="fas fa-circle-notch"></i>
-                <i class="fas fa-comment-alt"></i>
-                <i class="fas fa-ellipsis-v"></i>
-            </div>
-        </div>
-        <!-- menu lato dx -->
-        <div id="header-msg-menu">
-            <div class="friend-info">
-                <img src="IMG/avatar_2.jpg" class="header-avatar" alt="">
-                <div class="flex-column">
+    <div id="container">
+        <!-- header -->
+        <header class="header">
+            <!-- menu lato sx -->
+            <div id= 'header-menu'>
+                <!-- contenitore user info -->
+                <div class="user-info">
+                    <img src="IMG/avatar_1.jpg" class="header-avatar" alt="">
                     <strong>Nome Utente</strong>
-                    <span>Ultimo accesso effettuato il 25/2/10</span>
+                </div>
+                <!-- contenitore icone  -->
+                <div class="header-icon">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
-            <div class="header-icon">                
-                <i class="fas fa-search"></i>
-                <i class="fas fa-paperclip"></i>
-                <i class="fas fa-ellipsis-v"></i>
+            <!-- menu lato dx -->
+            <div id="header-msg-menu">
+                <div class="friend-info">
+                    <img src="IMG/avatar_2.jpg" class="header-avatar" alt="">
+                    <div class="flex-column">
+                        <strong>Nome Utente</strong>
+                        <span>Ultimo accesso effettuato il 25/2/10</span>
+                    </div>
+                </div>
+                <div class="header-icon">                
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
             </div>
-        </div>
-    </header>
-    <!-- lista messaggi sinistra -->
-    <section id="msg-list-container">
-        <div id="notifications-container">
-            <i class="far fa-bell-slash"></i>
-            <div class="flex-column">
-                <span>Messaggi</span>
-                <span class= 'underline'>Attiva notifiche</span>
+        </header>
+        <!-- lista messaggi sinistra -->
+        <main class="main">
+            <section id="msg-list-container">
+                <div id="notifications-container">
+                    <i class="far fa-bell-slash"></i>
+                    <div class="flex-column">
+                        <span>Messaggi</span>
+                        <span class= 'underline'>Attiva notifiche</span>
+                    </div>
+                </div>
+                <div id="input-search">
+                    <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    <i class="fas fa-search"></i>
+                </div>
+                <ul id="all-message">
+                    <li>
+                        <div class="message-container">
+                            <img src="img/avatar_4.jpg" alt="">
+                            <div class="flex-column">
+                                <span>Messaggi</span>
+                                <span class='underline'>Attiva notifiche</span>
+                            </div>
+                            <span class="aling-self-start">Data messaggio</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="message-container">
+                            <img src="img/avatar_5.jpg" alt="">
+                            <div class="flex-column">
+                                <span>Messaggi</span>
+                                <span class='underline'>Attiva notifiche</span>
+                            </div>
+                            <span class="aling-self-start">Data messaggio</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="message-container">
+                            <img src="img/avatar_6.jpg" alt="">
+                            <div class="flex-column">
+                                <span>Messaggi</span>
+                                <span class='underline'>Attiva notifiche</span>
+                            </div>
+                            <span class="aling-self-start">Data messaggio</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <div id="chat-container">
+    
             </div>
-        </div>
-        <div id="input-search">
-            <input type="text" placeholder="Cerca o inizia una nuova chat">
-            <i class="fas fa-search"></i>
-        </div>
-        <ul id="all-message">
-            <li>
-                <div class="message-container">
-                    <img src="img/avatar_4.jpg" alt="">
-                    <div class="flex-column">
-                        <span>Messaggi</span>
-                        <span class='underline'>Attiva notifiche</span>
-                    </div>
-                    <span class="aling-self-start">Data messaggio</span>
-                </div>
-            </li>
-            <li>
-                <div class="message-container">
-                    <img src="img/avatar_5.jpg" alt="">
-                    <div class="flex-column">
-                        <span>Messaggi</span>
-                        <span class='underline'>Attiva notifiche</span>
-                    </div>
-                    <span class="aling-self-start">Data messaggio</span>
-                </div>
-            </li>
-            <li>
-                <div class="message-container">
-                    <img src="img/avatar_6.jpg" alt="">
-                    <div class="flex-column">
-                        <span>Messaggi</span>
-                        <span class='underline'>Attiva notifiche</span>
-                    </div>
-                    <span class="aling-self-start">Data messaggio</span>
-                </div>
-            </li>
-        </ul>
-    </section>
+        </main>
+    </div>
+    <div class="container-bg-top"></div>
+    <div class="container-bg-bottom"></div>
     <!-- mine js -->
     <script src="js/script.js"></script>
 </body>
