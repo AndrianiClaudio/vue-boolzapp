@@ -47,7 +47,7 @@ img.header-avatar {
     /* background-color: green; */
     display: flex;
     justify-content: space-between;
-    width: var(--header-menu-width);
+    min-width: var(--header-menu-width);
 }
 /* user container */
 .user-info {
