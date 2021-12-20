@@ -247,11 +247,13 @@ main.chat-main {
     border-radius: 0.7rem;
     width: 40%;
 }
-.msg-date {
+.msg-date-chat {
     position: absolute;
     bottom: 0;
-    right: 0;
-    padding-right: 0.25rem;
+    right: 0.6rem;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color:#c0c3c5;
     text-align: right;
     height: 1rem;
     width: 100%;
