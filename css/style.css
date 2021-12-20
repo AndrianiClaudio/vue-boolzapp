@@ -40,7 +40,7 @@ footer.chat-footer{
     font-size: 0.9rem;
 }
 .grey-color {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color:#c0c3c5;
 }
 .underline-grey:hover {
@@ -65,7 +65,7 @@ img {
     background-color: #e9ebeb;
 }
 .message-container .flex-column {
-    width: 50%;
+    width: 250px;
     padding-right: 1.5rem;
 }
 .message-container .flex-column span.grey-color {
@@ -237,13 +237,24 @@ main.chat-main {
     flex-wrap: wrap;
     flex-direction: column;
     padding: 2rem;
+    overflow-y: auto;
 }
 .msg {
     display: flex;
+    position: relative;
     margin: 0.5rem;
     padding: 1rem;
     border-radius: 0.7rem;
     width: 40%;
+}
+.msg-date {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 0.25rem;
+    text-align: right;
+    height: 1rem;
+    width: 100%;
 }
 .msg.received {
     align-self: flex-start;

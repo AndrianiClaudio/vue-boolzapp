@@ -68,54 +68,15 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <ul id="all-message">
-                    <!-- <li>
-                        <div class="message-container">
-                            <img src="img/avatar_4.jpg" alt="">
-                            <div class="flex-column">
-                                <span class="name">Messaggi</span>
-                                <span class='grey-color'>ok ...</span>
-                            </div>
-                            <span class="align-self-start msg-date">20/12/2021 10:22:21</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="message-container">
-                            <img src="img/avatar_5.jpg" alt="">
-                            <div class="flex-column">
-                                <span class="name">Messaggi</span>
-                                <span class='grey-color'>Mi piacerebbe ma devo andare a ...</span>
-                            </div>
-                            <span class="align-self-start msg-date">20/03/2020 16:35:00</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="message-container clicked">
-                            <img src="img/avatar_6.jpg" alt="">
-                            <div class="flex-column">
-                                <span class="name">Messaggi</span>
-                                <span class='grey-color'>Ah scusa! ...</span>
-                            </div>
-                            <span class="align-self-start msg-date">28/03/2020 16:15:22</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="message-container">
-                            <img src="img/avatar_6.jpg" alt="">
-                            <div class="flex-column">
-                                <span class="name">Messaggi</span>
-                                <span class='grey-color'>Si, ma preferirei andare al ci ...</span>
-                            </div>
-                            <span class="align-self-start msg-date">10/01/2020 15:50:00</span>
-                        </div>
-                    </li> -->
-                    <li v-for = 'contact in contacts'>
-                        <div class="message-container">
+                    <li v-for = '(contact,index) in contacts'>
+                        <div class="message-container" :class= '(index == clicked) ? "clicked": ""'
+                        @click = 'chanceClicked(index)'>
                             <img :src=`img/avatar${contact.avatar}.jpg` alt="">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
                                 <span class='grey-color'>{{contact.messages[contact.messages.length-1].text}}</span>
                             </div>
-                            <span class="align-self-start msg-date">10/01/2020 15:50:00</span>
+                            <span class="align-self-start msg-date">{{contact.messages[contact.messages.length-1].date}}</span>
                         </div>
                     </li>
                 </ul>
@@ -124,6 +85,7 @@
                 <main class="chat-main">
                     <div class="msg received">
                         Messaggio 1
+                        <span class="msg-date">{{contacts[0].messages[0].date}}</span>
                     </div>
                     <div class="msg sent">
                         Messaggio 2Messaggio 2Messaggio 2

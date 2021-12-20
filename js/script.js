@@ -6,8 +6,13 @@ const container = new Vue ({
     el: '#container',
     data: {
         contacts: [],
+        clicked: 2,
     },
-    methods: {},
+    methods: {
+        chanceClicked(i) {
+            this.clicked = i;
+        }
+    },
     created () {
         // Ecco l’array contacts:
         this.contacts = [
