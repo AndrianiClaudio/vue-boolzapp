@@ -58,15 +58,25 @@ img {
 #notifications-container.clicked i {
     color: #8edafc;
 }
+.message-container {
+    display: flex;
+}
 .message-container.clicked {
     background-color: #e9ebeb;
 }
 .message-container .flex-column {
     width: 50%;
+    padding-right: 1.5rem;
+}
+.message-container .flex-column span.grey-color {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .msg-date {
     font-size: 0.8rem;
     color: #c0c3c5;
+    align-content: flex-end;
 }
 /* --CONTAINER */
 #container {
@@ -239,7 +249,7 @@ main.chat-main {
     align-self: flex-start;
     background-color: white;
 }
-.msg.send {
+.msg.sent {
     align-self: flex-end;
     background-color: #d5f9ba;
 }

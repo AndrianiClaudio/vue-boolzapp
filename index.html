@@ -68,7 +68,7 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <ul id="all-message">
-                    <li>
+                    <!-- <li>
                         <div class="message-container">
                             <img src="img/avatar_4.jpg" alt="">
                             <div class="flex-column">
@@ -107,6 +107,16 @@
                             </div>
                             <span class="align-self-start msg-date">10/01/2020 15:50:00</span>
                         </div>
+                    </li> -->
+                    <li v-for = 'contact in contacts'>
+                        <div class="message-container">
+                            <img :src=`img/avatar${contact.avatar}.jpg` alt="">
+                            <div class="flex-column">
+                                <span class="name">{{contact.name}}</span>
+                                <span class='grey-color'>{{contact.messages[contact.messages.length-1].text}}</span>
+                            </div>
+                            <span class="align-self-start msg-date">10/01/2020 15:50:00</span>
+                        </div>
                     </li>
                 </ul>
             </section>
@@ -115,7 +125,9 @@
                     <div class="msg received">
                         Messaggio 1
                     </div>
-                    <div class="msg send">
+                    <div class="msg sent">
+                        Messaggio 2Messaggio 2Messaggio 2
+                        Messaggio 2
                         Messaggio 2
                     </div>
                     <div class="msg received">
@@ -124,7 +136,7 @@
                     <div class="msg received">
                         Messaggio 1
                     </div>
-                    <div class="msg send">
+                    <div class="msg sent">
                         Messaggio 2
                     </div>
                     <div class="msg received">
