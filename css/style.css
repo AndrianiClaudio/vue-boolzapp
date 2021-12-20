@@ -1,11 +1,11 @@
 :root {
     --header-height: 60px;
     --header-menu-width: 450px;
-    --min-header-msg-menu-width: 400px;
+    --min-menu-width: 400px;
     --main-container-margin: 2.5rem;
     --footer-height: 50px;
 }
-
+/* -- GENERALI */
 * {
     margin: 0;
     padding: 0;
@@ -15,16 +15,55 @@ html {
     font-size: 100%;
 }
 
-
-body {
-    background-color: yellowgreen;
+#notifications-container,
+.message-container{
+    background-color: white;
 }
+/* #notifications-container:not(.clicked),
+.message-container:not(.clicked) {
+    background-color: white;
+} */
+
+#header-msg-menu,
+main.chat-main,
+footer.chat-footer{
+    min-width: var(--min-menu-width);
+}
+.aling-self-start {
+    align-self: flex-start;
+    padding-top: 0.5rem;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.underline-grey {
+    color: #557f92;
+    text-decoration: underline solid #557f92;
+}
+.underline-grey:hover {
+    cursor: pointer;
+}
+img {
+    border-radius: 50%;
+}
+#notifications-container.clicked {
+    background-color: #8edafc;
+}
+#notifications-container.clicked i {
+    color: #8edafc;
+}
+.message-container.clicked {
+    background-color: #e9ebeb;
+}
+
+/* --CONTAINER */
 #container {
     position: relative;
     width: 80%;
     margin: var(--main-container-margin) auto;
 }
-
 [class ^= 'container-bg-'] {
     z-index: -1;
 }
@@ -32,7 +71,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 15vh;
     background-color: #009687;
 }
@@ -40,37 +79,42 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 85vh;
     background-color: #dbdbd2;
 }
-
-.clicked {
-    background-color: aqua;
-}
-
-
-
+/* --FINE CONTAINER */
 
 /* --HEADER */
 header.header {
     position: sticky;
     display: flex;
-    min-width: calc(var(--header-menu-width) + var(--min-header-msg-menu-width));
+    min-width: calc(var(--header-menu-width) + var(--min-menu-width));
     height: var(--header-height);
     background-color: lightgrey;
 }
 header.header > * {
     max-height: 100%;
 }
-/* avatar */
 img.header-avatar {
     height: var(--header-height);
     padding: 0.4rem;
 }
-/* header icon */
+/* --1: header-menu */
+#header-menu {
+    /* background-color: green; */
+    display: flex;
+    justify-content: space-between;
+    min-width: var(--header-menu-width);
+}
+.user-info {
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0.35rem;
+}
 .header-icon {
-    /* background-color: aqua; */
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -81,29 +125,12 @@ img.header-avatar {
     color: darkgray;
     cursor: pointer;
 }
-/* --#header-menu: MENU SX */
-#header-menu {
-    /* background-color: green; */
-    display: flex;
-    justify-content: space-between;
-    min-width: var(--header-menu-width);
-}
-/* user container */
-.user-info {
-    /* background-color: yellow; */
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-left: 0.35rem;
-}
-/* --#header-msg-menu: MENU DX */
+/* --2: header-msg-menu */
 #header-msg-menu {
     width: 100%;
-    /* background-color: red; */
     display: flex;
     justify-content: space-between;
     height: 80px;
-    min-width: var(--min-header-msg-menu-width);
     border-left: 2px solid darkgrey;
 }
 .friend-info {
@@ -112,24 +139,17 @@ img.header-avatar {
 }
 /* --FINE HEADER */
 
-.flex-column {
+/* --MAIN */
+main.main {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
 }
-.underline-grey {
-    color: #557f92;
-    text-decoration: underline solid #557f92;
-}
-
-/* MAIN CONTENT SX: LISTA MESSAGGI */
+/* --1: msg-list-container */
 #msg-list-container {
     overflow-y: auto;
-    /* min-height: 200px; */
     display: flex;
     flex-direction: column;
     width: var(--header-menu-width);
-    background-color: white;
+    background-color: #fafafa;
     height: calc(100vh - var(--header-height) - var(--main-container-margin)*2);
     gap: 0.5rem;
 }
@@ -139,11 +159,8 @@ img.header-avatar {
     gap: 0.5rem;
     display: flex;
     align-items: center;
-    
 }
-/* #notifications-container {
-    background-color: white;
-} */
+
 #notifications-container > i {
     background-color: white;
     border-radius: 50%;
@@ -152,70 +169,57 @@ img.header-avatar {
 }
 #input-search {
     position: relative;
-    margin: 0.25rem;
+    margin: 0.15rem;
 }
 #input-search > input {
     width: calc(100% - 0.25rem);
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 2rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 4rem;
 } 
 #input-search > i {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: 1.5rem;
+    color: #b6b9bb;
     transform: translateY(-50%);
 }
-.message-container  img {
+.message-container img {
     max-height: 60px;
     padding: 0.5rem;
 }
-.aling-self-start {
-    align-self: flex-start;
-    padding-top: 0.5rem;
-}
-
-img {
-    border-radius: 50%;
-}
+/* --2: chat-container */
 #chat-container {
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - var(--header-height) - var(--main-container-margin)*2);
     width: calc(100% - var(--header-menu-width));
     background-color: yellowgreen;
 }
-main.main {
-    display: flex;
-}
 main.chat-main {
     background-image: url('../img/mine.jpg');
-}
-#chat-container {
-    display: flex;
-    flex-direction: column;
-}
-#chat-container > main {
     height: calc(100% - var(--footer-height));
     width: 100%;
 }
-footer.footer-chat {
+footer.chat-footer {
     background-color: #f3eeea;
     height: var(--footer-height);
     width: 100%;
     display: flex;
-    align-self: flex-end;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 2.5rem;
     gap: 2.5rem;
 }
-.footer-chat > i {
+.chat-footer > i {
     font-size: 1.3rem;
     color: #6b7376;
 }
-.footer-chat > input {
+.chat-footer > input {
     border: 0;
     border-radius: 0.4rem;
     width: 100%;
     height: 100%;
     padding-left: 1rem;
 }
+/* --FINE MAIN */
