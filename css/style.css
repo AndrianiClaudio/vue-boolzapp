@@ -1,8 +1,7 @@
 :root {
     --header-height: 75px;
-    --header-menu-width: 500px;
+    --header-menu-width: 460px;
     --min-menu-width: 400px;
-    /* --main-container-margin: 1.5rem; */
     --footer-height: 50px;
 }
 /* -- GENERALI */
@@ -59,11 +58,14 @@ img {
 .message-container {
     display: flex;
     min-height: 85px;
+    border-bottom: 1px solid #c0c3c5;
 }
 .message-container.clicked {
     background-color: #e9ebeb;
 }
 .message-container .flex-column {
+    align-self: flex-start;
+    padding-top: 0.7rem;
     max-width: 215px;
     margin-right: auto;
 }
@@ -150,6 +152,7 @@ main.main {
     display: flex;
     flex-direction: column;
     min-width: var(--header-menu-width);
+    max-width: var(--header-menu-width);
     background-color: #fafafa;
     height: calc(100vh - var(--header-height) - 1.5rem * 2);
     min-height: 350px;
@@ -173,7 +176,7 @@ main.main {
 }
 #input-search > input {
     font-size: 0.95rem;
-    width: calc(100% - 0.25rem);
+    width: 100%;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     padding-left: 4rem;
@@ -186,6 +189,9 @@ main.main {
     transform: translateY(-50%);
     font-size: 1rem;
 }
+ul#all-message {
+    max-width: var(--header-menu-width);
+}
 .message-container {
     gap: 0.5rem;
     display: flex;
@@ -195,10 +201,6 @@ main.main {
     max-height: 85px;
     padding: 0.7rem;
     padding-left: 1rem;
-}
-.message-container > .flex-column {
-    align-self: flex-start;
-    padding-top: 0.7rem;
 }
 /* --2: chat-container */
 #chat-container {
@@ -223,8 +225,9 @@ div.chat-main {
     display: flex;
     margin: 0.5rem;
     padding: 0.85rem;
+    padding-bottom: 0.15rem;
     border-radius: 0.7rem;
-    width: 55%;
+    width: 45%;
     flex-direction: column;
 }
 .msg-date-chat {
@@ -232,7 +235,6 @@ div.chat-main {
     font-size: 0.8rem;
     color:#c0c3c5;
     text-align: right;
-    height: 1rem;
     width: 100%;
 }
 .msg.received {
@@ -265,3 +267,29 @@ footer.chat-footer {
     padding-left: 1rem;
 }
 /* --FINE MAIN */
+
+
+@media screen and (max-width: 900px) {
+    :root {
+        --header-menu-width: 250px;
+    }
+    .message-container .msg-date{
+        margin: 0 auto;
+    }
+    .message-container {
+        gap: 0;
+        flex-direction: column;
+    }
+    /* .message-container.clicked {
+        background-color: #e9ebeb;
+    } */
+    .message-container .flex-column {
+        padding-top: 0.25rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .message-container img {
+        max-height: 65px;
+        padding: 0.35rem;
+    }
+}
