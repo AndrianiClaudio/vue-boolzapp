@@ -56,7 +56,38 @@ const app = new Vue ({
                     prefix: 'fa-',
                     name: 'bell-slash',
                 },
+                text: 'Ricevi notifiche di nuovi messaggi',
+                activeText: 'Attiva notifiche dekstop',
                 clicked: false,
+            },
+            input: {
+                placeholder: 'Cerca o inizia una nuova chat',
+                value: '',
+                type: 'text',
+                icon: {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'search',
+                },
+            },
+            footer: {
+                input: {
+                    placeholder: 'Scrivi un messaggio',
+                    type: 'text',
+                    value: '',
+                },
+                icons: [
+                    {
+                        family: 'far',
+                        prefix: 'fa-',
+                        name: 'smile',
+                    },
+                    {
+                        family: 'fas',
+                        prefix: 'fa-',
+                        name: 'microphone',
+                    }
+                ]
             }
         },
     },

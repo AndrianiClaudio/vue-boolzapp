@@ -55,17 +55,17 @@
                 <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
                     <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
                     <div class="flex-column">
-                        <span>Ricevi notifiche di nuovi messaggi</span>
-                        <span class= 'underline-grey'>Attiva notifiche dekstop</span>
+                        <span>{{main.notificationsContainer.text}}</span>
+                        <span class= 'underline-grey'>{{main.notificationsContainer.activeText}}</span>
                     </div>
                 </div>
                 <div id="input-search">
-                    <input type="text" placeholder="Cerca o inizia una nuova chat">
-                    <i class="fas fa-search"></i>
+                    <input :type="main.input.type" :placeholder='main.input.placeholder'>
+                    <i :class="`${main.input.icon.family} ${main.input.icon.prefix}${main.input.icon.name}`"></i>
                 </div>
                 <ul id="all-message">
                     <li v-for = '(contact,index) in contacts'>
-                        <div class="message-container" :class= '(index == clicked) ? "clicked": ""'
+                        <div class="message-container" :class= '{clicked: (index == clicked)}'
                         @click = 'chanceClicked(index)'>
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
@@ -85,9 +85,9 @@
                     </div>
                 </div>
                 <footer class="chat-footer">
-                    <i class="far fa-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio">
-                    <i class="fas fa-microphone"></i>
+                    <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
+                    <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder">
+                    <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
                 </footer>
             </div>
         </main>
