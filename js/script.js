@@ -60,8 +60,9 @@ const app = new Vue ({
                 activeText: 'Attiva notifiche dekstop',
                 clicked: false,
             },
-            input: {
+            input: {///input-search
                 placeholder: 'Cerca o inizia una nuova chat',
+                placeholder_mini: 'Cerca / inizia chat',
                 value: '',
                 type: 'text',
                 icon: {
@@ -104,7 +105,7 @@ const app = new Vue ({
         },
         notificationsStatusChange() {
             this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
-        }
+        },
     },
     created () {
         // Ecco l’array contacts:
@@ -360,8 +361,7 @@ const app = new Vue ({
         ];
         this.user  = {
             name: 'Claudio',
-            // last_access: '21/12/2020',
             avatar: '_5',
         }
-    }
+    },
 });

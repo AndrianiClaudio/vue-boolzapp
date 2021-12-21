@@ -1,6 +1,6 @@
 :root {
     --header-height: 75px;
-    --header-menu-width: 440px;
+    --header-menu-width: 470px;
     --min-menu-width: 400px;
     --footer-height: 50px;
 }
@@ -156,6 +156,9 @@ main.main {
     height: calc(100vh - var(--header-height) - 1.5rem * 2);
     min-height: 350px;
     gap: 0.5rem;
+
+
+    overflow: hidden;
 }
 #notifications-container {
     padding: 1rem;
@@ -190,6 +193,8 @@ main.main {
 }
 ul#all-message {
     max-width: var(--header-menu-width);
+    overflow: scroll;
+    overflow-x: hidden;
 }
 .message-container {
     gap: 0.5rem;
@@ -206,7 +211,6 @@ ul#all-message {
     display: flex;
     height: calc(100vh - var(--header-height) - 1.5rem *2);
     flex-basis: calc(100% - var(--header-menu-width));
-    background-color: yellowgreen;
     flex-wrap: wrap;
     min-height: 350px;
 }
