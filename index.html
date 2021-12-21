@@ -20,15 +20,15 @@
 <body>
     <div class="container-bg-top"></div>
     <div class="container-bg-bottom"></div>
-    <div id="container">
+    <div id="app">
         <!-- header -->
         <header class="header">
             <!-- menu lato sx -->
             <div id= 'header-menu'>
                 <!-- contenitore user info -->
                 <div class="user-info">
-                    <img src="IMG/avatar_1.jpg" class="header-avatar" alt="">
-                    <span class='name'>Nome Utente</span>
+                    <img :src="`IMG/avatar${user.avatar}.jpg`" class="header-avatar" alt="">
+                    <span class='name'>{{user.name}}</span>
                 </div>
                 <!-- contenitore icone  -->
                 <div class="header-icon">
@@ -42,8 +42,8 @@
                 <div class="friend-info">
                     <img src="IMG/avatar_2.jpg" class="header-avatar" alt="">
                     <div class="flex-column">
-                        <span class="name">Samuele</span>
-                        <span class="last-access-date">Ultimo accesso oggi alle 28/03/2020 16:15:22</span>
+                        <span class="name">{{contacts[clicked].name}}</span>
+                        <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
                     </div>
                 </div>
                 <div class="header-icon">                
@@ -55,7 +55,7 @@
         </header>
         <!-- lista messaggi sinistra -->
         <main class="main">
-            <section id="msg-list-container">
+            <div id="msg-list-container">
                 <div id="notifications-container" class="clicked">
                     <i class="fas fa-bell-slash"></i>
                     <div class="flex-column">
@@ -80,11 +80,11 @@
                         </div>
                     </li>
                 </ul>
-            </section>
-            <section id="chat-container">
+            </div>
+            <div id="chat-container">
                 <div class="chat-main">
                     <div v-for = '(msg,index) in contacts[clicked].messages' :class = '`msg ${msg.status}`'>
-                        {{msg.text}}
+                        <span>{{msg.text}}</span>
                         <span class="msg-date-chat">{{msg.date}}</span>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <input type="text" placeholder="Scrivi un messaggio">
                     <i class="fas fa-microphone"></i>
                 </footer>
-            </section>
+            </div>
         </main>
     </div>
     <!-- mine js -->

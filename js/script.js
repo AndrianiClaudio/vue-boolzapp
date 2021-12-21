@@ -7,12 +7,16 @@
 // Milestone 2
 // Visualizzazione dinamica dei messaggi: tramite la direttiva v -for, visualizzare tutti i messaggi relativi al contatto attivo all’interno del pannello della conversazione
 // Click sul contatto mostra la conversazione del contatto cliccato
-
-const container = new Vue ({
-    el: '#container',
+const app = new Vue ({
+    el: '#app',
     data: {
+        user: {},
         contacts: [],
-        clicked: 0,
+        clicked:0,
+        header: {
+        },
+        main:{
+        },
     },
     methods: {
         chanceClicked(i) {
@@ -43,6 +47,7 @@ const container = new Vue ({
                         status: "received",
                     },
                 ],
+                last_access: '21/10/2020 16:15:22',
             },
             {
                 name: "Fabio",
@@ -65,6 +70,7 @@ const container = new Vue ({
                         status: "sent",
                     },
                 ],
+                last_access: '28/03/2020 16:10:32',
             },
 
             {
@@ -88,6 +94,7 @@ const container = new Vue ({
                         status: "received",
                     },
                 ],
+                last_access: '28/03/2020 16:15:22',
             },
             {
                 name: "Luisa",
@@ -105,8 +112,13 @@ const container = new Vue ({
                         status: "received",
                     },
                 ],
+                last_access: '27/03/2020 22:15:22',
             },
-        ]        
+        ];
+        this.user  = {
+            name: 'Claudio',
+            // last_access: '21/12/2020',
+            avatar: '_5'
+        }
     }
-
 });

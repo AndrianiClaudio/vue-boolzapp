@@ -79,9 +79,9 @@ img {
     align-content: flex-end;
 }
 /* --CONTAINER */
-#container {
+#app {
     position: relative;
-    width: 100vw;
+    width: 80%;
     min-width: calc(var(--header-menu-width) + var(--min-menu-width));;
     margin: var(--main-container-margin) auto;
 }
