@@ -258,7 +258,7 @@ div.chat-main {
     margin: 0.5rem;
     padding: 1rem;
     border-radius: 0.7rem;
-    min-width: 250px;
+    width: 50%;
 }
 .msg-date-chat {
     position: absolute;
