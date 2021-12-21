@@ -1,6 +1,6 @@
 :root {
     --header-height: 75px;
-    --header-menu-width: 460px;
+    --header-menu-width: 440px;
     --min-menu-width: 400px;
     --footer-height: 50px;
 }
@@ -66,7 +66,7 @@ img {
 .message-container .flex-column {
     align-self: flex-start;
     padding-top: 0.7rem;
-    max-width: 215px;
+    max-width: 200px;
     margin-right: auto;
 }
 .message-container .flex-column span.grey-color {
@@ -78,7 +78,6 @@ img {
     margin-right: 0.35rem;
     font-size: 0.8rem;
     color: #c0c3c5;
-    align-content: flex-end;
 }
 /* --CONTAINER */
 body {
@@ -280,9 +279,6 @@ footer.chat-footer {
         gap: 0;
         flex-direction: column;
     }
-    /* .message-container.clicked {
-        background-color: #e9ebeb;
-    } */
     .message-container .flex-column {
         padding-top: 0.25rem;
         margin: 0 auto;

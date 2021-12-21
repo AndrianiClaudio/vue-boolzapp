@@ -37,6 +37,7 @@
             </div>
             <!-- menu lato dx -->
             <div id="header-msg-menu">
+                <!-- informazioni utente collegato: avatar,nome,ultimo accesso -->
                 <div class="friend-info">
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
@@ -44,6 +45,7 @@
                         <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
                     </div>
                 </div>
+                <!-- contenitore icone -->
                 <div class="header-icon">   
                     <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
@@ -51,7 +53,9 @@
         </header>
         <!-- lista messaggi sinistra -->
         <main class="main">
+            <!-- lista notifiche, messaggi,cerca o inizia chat -->
             <div id="msg-list-container">
+                <!-- notifiche -->
                 <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
                     <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
                     <div class="flex-column">
@@ -59,10 +63,12 @@
                         <span class= 'underline-grey'>{{main.notificationsContainer.activeText}}</span>
                     </div>
                 </div>
+                <!-- cerca chat -->
                 <div id="input-search">
                     <input :type="main.input.type" :placeholder='main.input.placeholder'>
                     <i :class="`${main.input.icon.family} ${main.input.icon.prefix}${main.input.icon.name}`"></i>
                 </div>
+                <!-- elenco messaggi -->
                 <ul id="all-message">
                     <li v-for = '(contact,index) in contacts'>
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
@@ -77,13 +83,16 @@
                     </li>
                 </ul>
             </div>
+            <!-- contenuto chat -->
             <div id="chat-container">
                 <div class="chat-main">
+                    <!-- stampa messaggi con utente cliccato in lista messaggi -->
                     <div v-for = '(msg,index) in contacts[clicked].messages' :class = '`msg ${msg.status}`'>
                         <span>{{msg.text}}</span>
                         <span class="msg-date-chat">{{msg.date}}</span>
                     </div>
                 </div>
+                <!-- invio messaggi a utente selezionato -->
                 <footer class="chat-footer">
                     <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
                     <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder">
