@@ -14,8 +14,50 @@ const app = new Vue ({
         contacts: [],
         clicked:0,
         header: {
+            headerMenuIcons: [
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'circle-notch',
+                },
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'comment-alt',
+                },
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'ellipsis-v',
+                },
+            ],
+            headerMsgMenuIcons: [
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'search',
+                },
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'paperclip',
+                },
+                {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'ellipsis-v',
+                },
+            ]
         },
         main:{
+            notificationsContainer: {
+                icon: {
+                    family: 'fas',
+                    prefix: 'fa-',
+                    name: 'bell-slash',
+                },
+                clicked: false,
+            }
         },
     },
     methods: {
@@ -28,6 +70,9 @@ const app = new Vue ({
                 initials.push (el[0]);
             });
             return initials;
+        },
+        notificationsStatusChange() {
+            this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
         }
     },
     created () {
@@ -35,7 +80,7 @@ const app = new Vue ({
         this.contacts = [
             {
                 name: "Michele",
-                // avatar: "_1",
+                avatar: "_1",
                 visible: true,
                 messages: [
                     {
@@ -58,7 +103,7 @@ const app = new Vue ({
             },
             {
                 name: "Fabio",
-                // avatar: "_2",
+                avatar: "_2",
                 visible: true,
                 messages: [
                     {
@@ -82,7 +127,7 @@ const app = new Vue ({
 
             {
                 name: "Samuele",
-                // avatar: "_3",
+                avatar: "_3",
                 visible: true,
                 messages: [
                     {
@@ -125,7 +170,7 @@ const app = new Vue ({
         this.user  = {
             name: 'Claudio',
             // last_access: '21/12/2020',
-            avatar: 'isNaN'
+            avatar: '_5',
         }
     }
 });

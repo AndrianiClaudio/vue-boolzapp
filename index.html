@@ -32,9 +32,7 @@
                 </div>
                 <!-- contenitore icone  -->
                 <div class="header-icon">
-                    <i class="fas fa-circle-notch"></i>
-                    <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-ellipsis-v"></i>
+                    <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
             <!-- menu lato dx -->
@@ -46,18 +44,16 @@
                         <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
                     </div>
                 </div>
-                <div class="header-icon">                
-                    <i class="fas fa-search"></i>
-                    <i class="fas fa-paperclip"></i>
-                    <i class="fas fa-ellipsis-v"></i>
+                <div class="header-icon">   
+                    <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
         </header>
         <!-- lista messaggi sinistra -->
         <main class="main">
             <div id="msg-list-container">
-                <div id="notifications-container" class="clicked">
-                    <i class="fas fa-bell-slash"></i>
+                <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
+                    <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
                     <div class="flex-column">
                         <span>Ricevi notifiche di nuovi messaggi</span>
                         <span class= 'underline-grey'>Attiva notifiche dekstop</span>
