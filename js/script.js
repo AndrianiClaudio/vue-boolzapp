@@ -194,6 +194,166 @@ const app = new Vue ({
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
                     },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Lo sai che ha aperto una nuova pizzeria?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Si, ma preferirei andare al cinema",
+                        status: "received",
+                    },
                 ],
                 last_access: '27/03/2020 22:15:22',
             },
