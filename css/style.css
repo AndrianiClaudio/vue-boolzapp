@@ -21,7 +21,7 @@ html {
     background-color: white;
 }
 #header-msg-menu,
-main.chat-main,
+div.chat-main,
 footer.chat-footer{
     min-width: var(--min-menu-width);
 }
@@ -81,25 +81,27 @@ img {
 /* --CONTAINER */
 #container {
     position: relative;
-    width: 80%;
+    width: 100vw;
+    min-width: calc(var(--header-menu-width) + var(--min-menu-width));;
     margin: var(--main-container-margin) auto;
 }
 [class ^= 'container-bg-'] {
     z-index: -1;
-}
-.container-bg-top {
     position: absolute;
-    top: 0;
     left: 0;
     width: 100vw;
+    min-width: calc(var(--header-menu-width) + var(--min-menu-width));;
+}
+.container-bg-top {
+    top: 0;
     height: 20vh;
     background-color: #009687;
 }
 .container-bg-bottom {
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
-    left: 0;
-    width: 100vw;
+    /* left: 0; */
+    /* width: 100vw; */
     height: 80vh;
     background-color: #dbdbd2;
 }
@@ -171,7 +173,7 @@ main.main {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    width: var(--header-menu-width);
+    min-width: var(--header-menu-width);
     background-color: #fafafa;
     height: calc(100vh - var(--header-height) - var(--main-container-margin)*2);
     gap: 0.5rem;
@@ -229,7 +231,7 @@ main.main {
     background-color: yellowgreen;
     flex-wrap: wrap;
 }
-main.chat-main {
+div.chat-main {
     background-image: url('../img/mine.jpg');
     display: flex;
     height: calc(100% - var(--footer-height));
@@ -275,6 +277,7 @@ footer.chat-footer {
     justify-content: space-between;
     padding: 0.5rem 2.5rem;
     gap: 2.5rem;
+    align-self: flex-end;
 }
 .chat-footer > i {
     font-size: 1.3rem;
