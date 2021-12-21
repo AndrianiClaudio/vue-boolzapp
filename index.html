@@ -27,7 +27,7 @@
             <div id= 'header-menu'>
                 <!-- contenitore user info -->
                 <div class="user-info">
-                    <img :src="`IMG/avatar${user.avatar}.jpg`" class="header-avatar" alt="">
+                    <img :src="`IMG/avatar${user.avatar}.jpg`" class="header-avatar" :alt="name_initials(user.name)">
                     <span class='name'>{{user.name}}</span>
                 </div>
                 <!-- contenitore icone  -->
@@ -40,7 +40,7 @@
             <!-- menu lato dx -->
             <div id="header-msg-menu">
                 <div class="friend-info">
-                    <img src="IMG/avatar_2.jpg" class="header-avatar" alt="">
+                    <img :src="`IMG/avatar{contacts[clicked.avatar]}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
                         <span class="name">{{contacts[clicked].name}}</span>
                         <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
@@ -71,7 +71,7 @@
                     <li v-for = '(contact,index) in contacts'>
                         <div class="message-container" :class= '(index == clicked) ? "clicked": ""'
                         @click = 'chanceClicked(index)'>
-                            <img :src="`img/avatar${contact.avatar}.jpg`" alt="">
+                            <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
                                 <span class='grey-color'>{{contact.messages[contact.messages.length-1].text}}</span>

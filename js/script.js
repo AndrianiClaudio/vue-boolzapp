@@ -21,6 +21,13 @@ const app = new Vue ({
     methods: {
         chanceClicked(i) {
             this.clicked = i;
+        },
+        name_initials (name){
+            const initials = [];
+            name.split(' ').forEach(el => {
+                initials.push (el[0]);
+            });
+            return initials;
         }
     },
     created () {
@@ -28,7 +35,7 @@ const app = new Vue ({
         this.contacts = [
             {
                 name: "Michele",
-                avatar: "_1",
+                // avatar: "_1",
                 visible: true,
                 messages: [
                     {
@@ -51,7 +58,7 @@ const app = new Vue ({
             },
             {
                 name: "Fabio",
-                avatar: "_2",
+                // avatar: "_2",
                 visible: true,
                 messages: [
                     {
@@ -75,7 +82,7 @@ const app = new Vue ({
 
             {
                 name: "Samuele",
-                avatar: "_3",
+                // avatar: "_3",
                 visible: true,
                 messages: [
                     {
@@ -118,7 +125,7 @@ const app = new Vue ({
         this.user  = {
             name: 'Claudio',
             // last_access: '21/12/2020',
-            avatar: '_5'
+            avatar: 'isNaN'
         }
     }
 });

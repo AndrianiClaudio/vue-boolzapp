@@ -60,12 +60,13 @@ img {
 }
 .message-container {
     display: flex;
+    min-height: 85px;
 }
 .message-container.clicked {
     background-color: #e9ebeb;
 }
 .message-container .flex-column {
-    width: 250px;
+    margin-right: auto;
     padding-right: 1.5rem;
 }
 .message-container .flex-column span.grey-color {
@@ -121,6 +122,8 @@ header.header > * {
 img.header-avatar {
     height: var(--header-height);
     padding: 0.6rem;
+    display: flex;
+    align-items: center; /* gestione alt */
 }
 /* --1: header-menu */
 #header-menu {
