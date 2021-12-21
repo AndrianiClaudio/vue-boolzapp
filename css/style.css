@@ -2,7 +2,7 @@
     --header-height: 75px;
     --header-menu-width: 500px;
     --min-menu-width: 400px;
-    --main-container-margin: 1.5rem;
+    /* --main-container-margin: 1.5rem; */
     --footer-height: 50px;
 }
 /* -- GENERALI */
@@ -15,7 +15,6 @@ html {
     font-size: 100%;
     font-family: 'Roboto', sans-serif;
 }
-
 #notifications-container,
 .message-container{
     background-color: white;
@@ -25,7 +24,7 @@ div.chat-main,
 footer.chat-footer{
     min-width: var(--min-menu-width);
 }
-.align-self-start {
+.message-container .msg-date{
     align-self: flex-start;
     padding-top: 0.5rem;
 }
@@ -43,7 +42,8 @@ footer.chat-footer{
     font-size: 0.85rem;
     color:#c0c3c5;
 }
-.underline-grey:hover {
+.underline-grey:hover,
+i:hover:not(#input-search i) {
     cursor: pointer;
 }
 span.name {
@@ -52,11 +52,9 @@ span.name {
 img {
     border-radius: 50%;
 }
-#notifications-container.clicked {
-    background-color: #8edafc;
-}
+#notifications-container.clicked,
 #notifications-container.clicked i {
-    color: #8edafc;
+    background-color: #8edafc;
 }
 .message-container {
     display: flex;
@@ -68,7 +66,6 @@ img {
 .message-container .flex-column {
     max-width: 215px;
     margin-right: auto;
-    /* padding-right: 2rem; */
 }
 .message-container .flex-column span.grey-color {
   white-space: nowrap;
@@ -88,42 +85,16 @@ body {
 #app {
     position: relative;
     width: 80%;
-    min-width: calc(var(--header-menu-width) + var(--min-menu-width));;
-    margin: var(--main-container-margin) auto;
+    margin: 1.5rem auto;
 }
-/* [class ^= 'container-bg-'] {
-    z-index: -1;
-    position: absolute;
-    left: 0;
-    width: 100vw;
-    min-width: calc(var(--header-menu-width) + var(--min-menu-width));;
-}
-.container-bg-top {
-    top: 0;
-    height: 20vh;
-    background-color: #009687;
-}
-.container-bg-bottom {
-    /* position: absolute; */
-    /* bottom: 0; */
-    /* left: 0; */
-    /* width: 100vw; */
-    /* height: 80vh; */
-    /* background-color: #dbdbd2; */
-/* }  */
-/* --FINE CONTAINER */
-
 /* --HEADER */
 header.header {
-    position: sticky;
     display: flex;
     min-width: calc(var(--header-menu-width) + var(--min-menu-width));
     height: var(--header-height);
     background-color: #eaeaea;
 }
-header.header > * {
-    max-height: 100%;
-}
+
 img.header-avatar {
     height: var(--header-height);
     padding: 0.6rem;
@@ -137,7 +108,6 @@ img.header-avatar {
     min-width: var(--header-menu-width);
 }
 .user-info {
-    /* background-color: yellow; */
     display: flex;
     align-items: center;
     padding-left: 0.35rem;
@@ -149,9 +119,7 @@ img.header-avatar {
     padding-right: 1rem;
 }
 .header-icon > i {
-    justify-self: flex-end;
     color: #b1b1b1;
-    cursor: pointer;
 }
 /* --2: header-msg-menu */
 #header-msg-menu {
@@ -183,7 +151,7 @@ main.main {
     flex-direction: column;
     min-width: var(--header-menu-width);
     background-color: #fafafa;
-    height: calc(100vh - var(--header-height) - var(--main-container-margin)*2);
+    height: calc(100vh - var(--header-height) - 1.5rem * 2);
     min-height: 350px;
     gap: 0.5rem;
 }
@@ -235,8 +203,8 @@ main.main {
 /* --2: chat-container */
 #chat-container {
     display: flex;
-    height: calc(100vh - var(--header-height) - var(--main-container-margin)*2);
-    width: calc(100% - var(--header-menu-width));
+    height: calc(100vh - var(--header-height) - 1.5rem *2);
+    flex-basis: calc(100% - var(--header-menu-width));
     background-color: yellowgreen;
     flex-wrap: wrap;
     min-height: 350px;
@@ -247,25 +215,21 @@ div.chat-main {
     height: calc(100% - var(--footer-height));
     flex-direction: column;
     padding: 2rem;
-    overflow-x: hidden;
     flex-basis: 100%;
     overflow-y: auto;
 }
 .msg {
     margin-right: auto;
     display: flex;
-    position: relative;
     margin: 0.5rem;
-    padding: 1rem;
+    padding: 0.85rem;
     border-radius: 0.7rem;
-    width: 50%;
+    width: 55%;
+    flex-direction: column;
 }
 .msg-date-chat {
-    position: absolute;
-    bottom: 0;
-    right: 0.6rem;
+    align-self: flex-end;
     font-size: 0.8rem;
-    line-height: 1rem;
     color:#c0c3c5;
     text-align: right;
     height: 1rem;
@@ -288,7 +252,6 @@ footer.chat-footer {
     justify-content: space-between;
     padding: 0.5rem 2.5rem;
     gap: 2.5rem;
-    align-self: flex-end;
 }
 .chat-footer > i {
     font-size: 1.3rem;
