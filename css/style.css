@@ -193,7 +193,7 @@ main.main {
 }
 ul#all-message {
     max-width: var(--header-menu-width);
-    overflow: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 .message-container {
