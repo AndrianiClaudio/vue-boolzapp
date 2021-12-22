@@ -72,7 +72,7 @@
                 <ul id="all-message">
                     <!-- mostreremo solo quelle contente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
-                    >
+                    :class= '{"d-none": !contact.visible}'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
                         @click = 'chanceClicked(index)'
