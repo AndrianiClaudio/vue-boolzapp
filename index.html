@@ -72,7 +72,7 @@
                 <ul id="all-message">
                     <!-- mostreremo solo quelle contente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
-                    v-if='visible(index)'>
+                    v-if='visible(index) && contact.messages.length > 0'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
                         @click = 'chanceClicked(index)'
@@ -92,13 +92,13 @@
                 <div class="chat-main">
                     <!-- stampa messaggi con utente cliccato in lista messaggi -->
                     <div v-for = '(msg,index) in contacts[clicked].messages' class='msg '  :class = 'msg.status'
-                    @click = 'showMenu(index)'>
+                    @click = 'showMenu(index)' v-if = 'msg.saved'>
                         <div v-if='msg.clicked' class="hidden-menu">
                             <ul class="hidden-ul">
                                 <li class="hidden-li">
                                     <span>Message info</span>
                                 </li>
-                                <li class="hidden-li">
+                                <li class="hidden-li" @click = 'deleteMessage(index)'>
                                     <span>Delete message</span>
                                 </li>
                             </ul>

@@ -216,11 +216,12 @@ ul#all-message {
 /* hidde-menu...al click sul messaggio compare questo menu che consentirá di eliminare il emssaggio*/
 .hidden-menu {
     position: absolute;
-    width: 75%;
-    background-color: red;
+    width: 80%;
+    background-color: white;
     z-index: 100000;
     top: calc(100% - 0.5rem);
     right: 0.5rem;
+    padding-left: 1.5rem;
 }
 ul.hidden-ul {
     display: flex;
