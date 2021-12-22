@@ -11,6 +11,8 @@
 // Milestone 3
 // Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
 
+// Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
+
 const app = new Vue ({
     el: '#app',
     data: {
@@ -114,11 +116,26 @@ const app = new Vue ({
         //devo sapere il contact a cui inviare...
         sendMessage(e) {
             const message = {
-                date: "DATA DEL MESSAGGIO",
+                date: "DATA DEL MESSAGGIO INVIATO",
                 text: e.target.value,
                 status: "sent",
             };
             this.contacts[this.clicked].messages.push(message);
+            // reset input value: dopo aver inviato un messaggio, cancello il suo contenuto dalla input
+            e.target.value = '';
+        },
+        receivedTimed() {
+            function message_received () {
+                const message = {
+                    date: "DATA DEL MESSAGGIO RICEVUTO",
+                    text: 'ok',
+                    status: "received",
+                };
+                app.contacts[app.clicked].messages.push(message);
+            };
+            // timer di 1 secondo: 1000ms
+            const timeout = 1000;
+            const timerID = setTimeout(message_received, timeout);
         }
     },
     created () {
