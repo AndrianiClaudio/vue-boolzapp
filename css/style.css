@@ -213,6 +213,26 @@ ul#all-message {
     flex-wrap: wrap;
     min-height: 350px;
 }
+/* hidde-menu...al click sul messaggio compare questo menu che consentirá di eliminare il emssaggio*/
+.hidden-menu {
+    position: absolute;
+    width: 75%;
+    background-color: red;
+    z-index: 100000;
+    top: calc(100% - 0.5rem);
+    right: 0.5rem;
+}
+ul.hidden-ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+li.hidden-li {
+    height: 3rem;
+    font-size: 1rem;
+    line-height: 3rem;
+}
+
 div.chat-main {
     background-image: url('../img/mine.jpg');
     display: flex;
@@ -224,6 +244,7 @@ div.chat-main {
 }
 .msg {
     margin-right: auto;
+    position: relative;
     display: flex;
     margin: 0.5rem;
     padding: 0.85rem;

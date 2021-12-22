@@ -91,7 +91,19 @@
             <div id="chat-container">
                 <div class="chat-main">
                     <!-- stampa messaggi con utente cliccato in lista messaggi -->
-                    <div v-for = '(msg,index) in contacts[clicked].messages' :class = '`msg ${msg.status}`'>
+                    <div v-for = '(msg,index) in contacts[clicked].messages' class='msg '  :class = 'msg.status'
+                    @click = 'showMenu(index)'>
+                        <div v-if='msg.clicked' class="hidden-menu">
+                            <ul class="hidden-ul">
+                                <li class="hidden-li">
+                                    <span>Message info</span>
+                                </li>
+                                <li class="hidden-li">
+                                    <span>Delete message</span>    
+                                    
+                                </li>
+                            </ul>
+                        </div>
                         <span>{{msg.text}}</span>
                         <span class="msg-date-chat">{{msg.date}}</span>
                     </div>

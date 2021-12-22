@@ -15,6 +15,9 @@
 // Milestone 4
 // Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite(es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 
+// Milestone 5
+// ● Cancella messaggio: cliccando sul messaggio appare un menu a tendina che
+// permette di cancellare il messaggio selezionato
 const app = new Vue ({
     el: '#app',
     data: {
@@ -149,6 +152,10 @@ const app = new Vue ({
                 this.contacts[i].visible = false;
             }
             return this.contacts[i].visible;
+        },
+        showMenu (i){
+            this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
+            
         }
     },
     created () {
@@ -163,16 +170,19 @@ const app = new Vue ({
                         date: "10/01/2020 15:30:55",
                         text: "Hai portato a spasso il cane?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Ricordati di dargli da mangiare",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 16:15:22",
                         text: "Tutto fatto!",
                         status: "received",
+                        clicked: false,
                     },
                 ],
                 last_access: '21/10/2020 16:15:22',
@@ -232,16 +242,19 @@ const app = new Vue ({
                         date: "20/03/2020 16:30:00",
                         text: "Ciao come stai?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "20/03/2020 16:30:55",
                         text: "Bene grazie! Stasera ci vediamo?",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "20/03/2020 16:35:00",
                         text: "Mi piacerebbe ma devo andare a fare la spesa.",
                         status: "sent",
+                        clicked: false,
                     },
                 ],
                 last_access: '28/03/2020 16:10:32',
@@ -256,16 +269,19 @@ const app = new Vue ({
                         date: "28/03/2020 10:10:40",
                         text: "La Marianna va in campagna",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "28/03/2020 10:20:10",
                         text: "Sicuro di non aver sbagliato chat?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "28/03/2020 16:15:22",
                         text: "Ah scusa!",
                         status: "received",
+                        clicked: false,
                     },
                 ],
                 last_access: '28/03/2020 16:15:22',
@@ -279,171 +295,205 @@ const app = new Vue ({
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:30:55",
                         text: "Lo sai che ha aperto una nuova pizzeria?",
                         status: "sent",
+                        clicked: false,
                     },
                     {
                         date: "10/01/2020 15:50:00",
                         text: "Si, ma preferirei andare al cinema",
                         status: "received",
+                        clicked: false,
                     },
                 ],
                 last_access: '27/03/2020 22:15:22',
