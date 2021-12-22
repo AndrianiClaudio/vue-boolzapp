@@ -80,9 +80,15 @@
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
-                                <span class='grey-color'>{{contact.messages[contact.messages.length-1].text}}</span>
+                                <span class='grey-color'>
+                                    <!-- {{contact.messages[contact.messages.length-1].text}} -->
+                                    {{findLastMessage(index)}}
+                                </span>
                             </div>
-                            <span class="msg-date">{{contact.messages[contact.messages.length-1].date}}</span>
+                            <span class="msg-date">
+                                <!-- {{contact.messages[contact.messages.length-1].date}} -->
+                                {{findLastDate(index)}}
+                            </span>
                         </div>
                     </li>
                 </ul>

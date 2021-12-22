@@ -178,7 +178,18 @@ const app = new Vue ({
         deleteMessage(i) {
             this.contacts[this.clicked].messages[i].saved = false;
         },
-        
+        findLastMessage(i) {
+            const saved = this.contacts[i].messages.filter((el)=> {
+                return el.saved==true;
+            });
+            return (saved.length != 0) ? saved[saved.length - 1].text : '';
+        },
+        findLastDate(i) {
+            const saved = this.contacts[i].messages.filter((el) => {
+                return el.saved == true;
+            });
+            return (saved.length != 0) ? saved[saved.length - 1].date : '';
+        }
     },
     created () {
         // Ecco l’array contacts:
