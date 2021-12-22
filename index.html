@@ -99,7 +99,7 @@
                     <!-- con il tasto invio dovremo ottenere il valore della input e inserirlo nell'array  -->
                     <!-- all'invio del messaggio deve partire un timer di un secondo che restituisce un messaggio di risposta dal nostro utente clicked -->
                     <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder"
-                    @keyup.enter= 'sendMessage($event);receivedTimed()'>
+                    @keyup.enter= 'sendMessage($event),receivedTimed()'>
                     
                     
                     <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
