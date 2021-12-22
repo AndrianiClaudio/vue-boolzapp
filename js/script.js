@@ -123,6 +123,8 @@ const app = new Vue ({
                 date: "DATA DEL MESSAGGIO INVIATO",
                 text: e.target.value,
                 status: "sent",
+                clicked:false,
+                saved: true,
             };
             this.contacts[this.clicked].messages.push(message);
             // reset input value: dopo aver inviato un messaggio, cancello il suo contenuto dalla input
@@ -134,6 +136,8 @@ const app = new Vue ({
                     date: "DATA DEL MESSAGGIO RICEVUTO",
                     text: 'ok',
                     status: "received",
+                    clicked: false,
+                    saved: true,
                 };
                 app.contacts[app.clicked].messages.push(message);
             };
@@ -153,18 +157,21 @@ const app = new Vue ({
             }
             return this.contacts[i].visible;
         },
+        // reset di tutti i menu
         hideMenu() {
             this.contacts[this.clicked].messages.forEach(el => {
                 el.clicked = false;
             });
         },
-        showMenu (i){
-            // reset di tutti i menu
+        hideMenu(i) {
             this.contacts[this.clicked].messages.forEach((el,index) => {
                 if(el.clicked && index != i) {
                     el.clicked = false;
                 }
-            });
+            }); 
+        },
+        showMenu (i){
+            this.hideMenu(i);
             this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
             
         },
