@@ -63,15 +63,20 @@
                 </div>
                 <!-- cerca chat -->
                 <div id="input-search">
-                    <input :type="main.input.type" :placeholder="main.input.placeholder">
+                    <input :type="main.input.type" :placeholder="main.input.placeholder" v-model='main.input.value'
+                    >
 
                     <i :class="`${main.input.icon.family} ${main.input.icon.prefix}${main.input.icon.name}`"></i>
                 </div>
                 <!-- elenco messaggi -->
                 <ul id="all-message">
-                    <li v-for = '(contact,index) in contacts'>
+                    <!-- mostreremo solo quelle contente il v-model della input -->
+                    <li v-for = '(contact,index) in contacts'
+                    >
+                        <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
-                        @click = 'chanceClicked(index)'>
+                        @click = 'chanceClicked(index)'
+                        v-if='visible(index)'>
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
@@ -93,15 +98,11 @@
                 </div>
                 <!-- invio messaggi a utente selezionato -->
                 <footer class="chat-footer">
-                    <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
-
-
+                    <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>`
                     <!-- con il tasto invio dovremo ottenere il valore della input e inserirlo nell'array  -->
                     <!-- all'invio del messaggio deve partire un timer di un secondo che restituisce un messaggio di risposta dal nostro utente clicked -->
                     <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder"
                     @keyup.enter= 'sendMessage($event),receivedTimed()'>
-                    
-                    
                     <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
                 </footer>
             </div>

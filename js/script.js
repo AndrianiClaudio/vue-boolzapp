@@ -10,8 +10,10 @@
 
 // Milestone 3
 // Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
-
 // Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
+
+// Milestone 4
+// Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite(es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 
 const app = new Vue ({
     el: '#app',
@@ -68,7 +70,6 @@ const app = new Vue ({
             },
             input: {///input-search
                 placeholder: 'Cerca o inizia una nuova chat',
-                placeholder_mini: 'Cerca / inizia chat',
                 value: '',
                 type: 'text',
                 icon: {
@@ -81,7 +82,7 @@ const app = new Vue ({
                 input: {
                     placeholder: 'Scrivi un messaggio',
                     type: 'text',
-                    value: '',
+                    // value: '', ... non utilizzata attualmente
                 },
                 icons: [
                     {
@@ -136,6 +137,18 @@ const app = new Vue ({
             // timer di 1 secondo: 1000ms
             const timeout = 1000;
             const timerID = setTimeout(message_received, timeout);
+        },
+        visible(i) {
+            // console.log(i,'-----',this.contacts[i].name.indexOf(this.main.input.value));
+            // console.log(this.contacts[i].name, this.contacts[i].name.toLowerCase());
+            // controllo se il valore della input é compreso nel nome del mio contact
+            if (this.contacts[i].name.toLowerCase().indexOf(this.main.input.value.toLowerCase()) > -1) {
+                this.contacts[i].visible = true;
+            }
+             else {
+                this.contacts[i].visible = false;
+            }
+            return this.contacts[i].visible;
         }
     },
     created () {
@@ -143,6 +156,52 @@ const app = new Vue ({
         this.contacts = [
             {
                 name: "Michele",
+                avatar: "_1",
+                visible: true,
+                messages: [
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Hai portato a spasso il cane?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Ricordati di dargli da mangiare",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 16:15:22",
+                        text: "Tutto fatto!",
+                        status: "received",
+                    },
+                ],
+                last_access: '21/10/2020 16:15:22',
+            },
+            {
+                name: "Marco",
+                avatar: "_1",
+                visible: true,
+                messages: [
+                    {
+                        date: "10/01/2020 15:30:55",
+                        text: "Hai portato a spasso il cane?",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 15:50:00",
+                        text: "Ricordati di dargli da mangiare",
+                        status: "sent",
+                    },
+                    {
+                        date: "10/01/2020 16:15:22",
+                        text: "Tutto fatto!",
+                        status: "received",
+                    },
+                ],
+                last_access: '21/10/2020 16:15:22',
+            },
+            {
+                name: "Martina",
                 avatar: "_1",
                 visible: true,
                 messages: [
