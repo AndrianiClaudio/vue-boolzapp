@@ -72,11 +72,11 @@
                 <ul id="all-message">
                     <!-- mostreremo solo quelle contente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
-                    :class= '{"d-none": !contact.visible}'>
+                    v-if='visible(index)'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
                         @click = 'chanceClicked(index)'
-                        v-if='visible(index)'>
+                        >
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
