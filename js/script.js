@@ -154,6 +154,14 @@ const app = new Vue ({
             return this.contacts[i].visible;
         },
         showMenu (i){
+            // reset di tutti i menu
+            this.contacts[this.clicked].messages.forEach((el,index) => {
+                if(el.clicked && index != i) {
+                    el.clicked = false;
+                    // console.log(index);
+                    // console.log(i);
+                }
+            });
             this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
             
         }
