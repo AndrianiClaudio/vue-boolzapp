@@ -156,8 +156,6 @@ main.main {
     height: calc(100vh - var(--header-height) - 1.5rem * 2);
     min-height: 350px;
     gap: 0.5rem;
-
-
     overflow: hidden;
 }
 #notifications-container {
@@ -193,8 +191,9 @@ main.main {
 }
 ul#all-message {
     max-width: var(--header-menu-width);
-    overflow-y: auto;
     overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
 }
 .message-container {
     gap: 0.5rem;

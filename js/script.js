@@ -7,6 +7,10 @@
 // Milestone 2
 // Visualizzazione dinamica dei messaggi: tramite la direttiva v -for, visualizzare tutti i messaggi relativi al contatto attivo all’interno del pannello della conversazione
 // Click sul contatto mostra la conversazione del contatto cliccato
+
+// Milestone 3
+// Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
+
 const app = new Vue ({
     el: '#app',
     data: {
@@ -106,6 +110,16 @@ const app = new Vue ({
         notificationsStatusChange() {
             this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
         },
+        // funzione che prende il testo del messaggio e lo pusha nell'araay messaggi corretto
+        //devo sapere il contact a cui inviare...
+        sendMessage(e) {
+            const message = {
+                date: "DATA DEL MESSAGGIO",
+                text: e.target.value,
+                status: "sent",
+            };
+            this.contacts[this.clicked].messages.push(message);
+        }
     },
     created () {
         // Ecco l’array contacts:
