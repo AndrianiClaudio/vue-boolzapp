@@ -14,6 +14,12 @@ html {
     font-size: 100%;
     font-family: 'Roboto', sans-serif;
 }
+
+/* INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
+/* --FINE INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
+
+
+
 #notifications-container,
 .message-container{
     background-color: white;

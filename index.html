@@ -19,23 +19,36 @@
 </head>
 <body>
     <div id="app">
-        <!-- header -->
+        <!-- INTESTAZIONE: diviso in due: parte sx e dx: 
+                SX: nome utente collegato, con avatar e icone
+                DX: nome utente selezionato dalla lista contatti,avatar,ultimo accesso, icone(--main SX: ul#all-message) 
+                ...icone: (attualmente senza alcuna funzione)
+            -->
         <header class="header">
-            <!-- menu lato sx -->
-            <div id= 'header-menu'>
-                <!-- contenitore user info -->
+            <!-- MENU SX -->
+            <!-- <div id= 'header-menu'>
                 <div class="user-info">
                     <img :src="`IMG/avatar${user.avatar}.jpg`" class="header-avatar" :alt="name_initials(user.name)">
                     <span class='name'>{{user.name}}</span>
                 </div>
-                <!-- contenitore icone  -->
                 <div class="header-icon">
                     <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
+            </div> -->
+            <div id= 'logged-info'>
+                <div class="avatar">
+                    <img :src="`img/avatar${user.avatar}.jpg`" :alt = "name_initials(user.name)">
+                </div>
+                <div class="name">
+                    <span>{{user.name}}</span>
+                </div>
+                <div class="icon">
+                    <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
+                </div>
             </div>
-            <!-- menu lato dx -->
+            <!-- --FINE MENU SX -->
+            <!-- MENU DX -->
             <div id="header-msg-menu">
-                <!-- informazioni utente collegato: avatar,nome,ultimo accesso -->
                 <div class="friend-info">
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
@@ -43,13 +56,13 @@
                         <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
                     </div>
                 </div>
-                <!-- contenitore icone -->
                 <div class="header-icon">   
                     <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
+            <!-- --FINE MENU DX -->
         </header>
-        <!-- lista messaggi sinistra -->
+        <!-- --FINE INTESTAZIONE -->
         <main class="main">
             <!-- lista notifiche, messaggi,cerca o inizia chat -->
             <div id="msg-list-container">
