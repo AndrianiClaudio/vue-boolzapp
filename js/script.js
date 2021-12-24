@@ -18,12 +18,7 @@
 // Milestone 5
 // ● Cancella messaggio: cliccando sul messaggio appare un menu a tendina che
 // permette di cancellare il messaggio selezionato
-
-
-// TO - DO
-// -----------------------------
 // Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
-// -----------------------------
 
 const app = new Vue ({
     el: '#app',
@@ -127,7 +122,7 @@ const app = new Vue ({
         //devo sapere il contact a cui inviare...
         sendMessage(e) {
             const message = {
-                date: "DATA DEL MESSAGGIO INVIATO",
+                date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
                 text: e.target.value,
                 status: "sent",
                 clicked:false,
@@ -140,7 +135,7 @@ const app = new Vue ({
         receivedTimed() {
             function message_received () {
                 const message = {
-                    date: "DATA DEL MESSAGGIO RICEVUTO",
+                    date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
                     text: 'ok',
                     status: "received",
                     clicked: false,
