@@ -4,7 +4,7 @@
     --min-menu-width: 400px;
     --footer-height: 50px;
 }
-/* -- GENERALI */
+/* GENERALI */
 * {
     margin: 0;
     padding: 0;
@@ -14,78 +14,6 @@ html {
     font-size: 100%;
     font-family: 'Roboto', sans-serif;
 }
-
-/* INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
-/* --FINE INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
-
-
-
-#notifications-container,
-.message-container{
-    background-color: white;
-}
-#header-msg-menu,
-div.chat-main,
-footer.chat-footer{
-    min-width: var(--min-menu-width);
-}
-.message-container .msg-date{
-    align-self: flex-start;
-    padding-top: 0.5rem;
-}
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-.underline-grey {
-    color: #557f92;
-    text-decoration: underline solid #557f92;
-    font-size: 0.9rem;
-}
-.grey-color {
-    font-size: 0.85rem;
-    color:#c0c3c5;
-}
-.underline-grey:hover,
-i:hover:not(#input-search i) {
-    cursor: pointer;
-}
-span.name {
-    font-size: 1.2rem;
-}
-img {
-    border-radius: 50%;
-}
-#notifications-container.clicked,
-#notifications-container.clicked i {
-    background-color: #8edafc;
-}
-.message-container {
-    display: flex;
-    min-height: 85px;
-    border-bottom: 1px solid #c0c3c5;
-}
-.message-container.clicked {
-    background-color: #e9ebeb;
-}
-.message-container .flex-column {
-    align-self: flex-start;
-    padding-top: 0.7rem;
-    max-width: 200px;
-    margin-right: auto;
-}
-.message-container .flex-column span.grey-color {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.msg-date {
-    margin-right: 0.35rem;
-    font-size: 0.8rem;
-    color: #c0c3c5;
-}
-/* --CONTAINER */
 body {
     background: linear-gradient(0.5turn, #009688 25%,#dbdbd2 10%);
 }
@@ -94,21 +22,40 @@ body {
     width: 80%;
     margin: 1.5rem auto;
 }
+#header-msg-menu,
+.chat-main,
+.chat-footer{
+    min-width: var(--min-menu-width);
+}
+
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.name {
+    font-size: 1.2rem;
+}
+img {
+    border-radius: 50%;
+}
+/* --FINE GENERALI */
 /* --HEADER */
 header.header {
-    display: flex;
-    min-width: calc(var(--header-menu-width) + var(--min-menu-width));
     height: var(--header-height);
+    min-width: calc(var(--header-menu-width) + var(--min-menu-width));
+    display: flex;
     background-color: #eaeaea;
 }
 
-img.header-avatar {
+.header-avatar {
     height: var(--header-height);
-    padding: 0.6rem;
     display: flex;
     align-items: center; /* gestione alt */
+    padding: 0.6rem;
 }
-/* --1: header-menu */
+/* INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
 #header-menu {
     display: flex;
     justify-content: space-between;
@@ -128,30 +75,31 @@ img.header-avatar {
 .header-icon > i {
     color: #b1b1b1;
 }
-/* --2: header-msg-menu */
+/* --FINE INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
+/* INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI */
 #header-msg-menu {
     width: 100%;
+    height: 80px;
     display: flex;
     justify-content: space-between;
-    height: 80px;
     border-left: 2px solid darkgrey;
-}
-.last-access-date {
-    color: #6b7376;
-    font-size: 0.9rem;
 }
 .friend-info {
     display: flex;
     align-items: center;
     gap: 0.35rem;
 }
+.last-access-date {
+    color: #6b7376;
+    font-size: 0.9rem;
+}
+/* --FINE INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI */
 /* --FINE HEADER */
-
 /* --MAIN */
 main.main {
     display: flex;
 }
-/* --1: msg-list-container */
+/* ATTIVA NOTIFICHE */
 #msg-list-container {
     overflow-y: auto;
     display: flex;
@@ -170,12 +118,23 @@ main.main {
     display: flex;
     align-items: center;
 }
+#notifications-container.clicked,
+#notifications-container.clicked i {
+    background-color: #8edafc;
+}
 #notifications-container > i {
     background-color: white;
     border-radius: 50%;
     padding: 1rem;
     font-size: 1.2rem;
 }
+.notifications-add-text {
+    color: #557f92;
+    text-decoration: underline solid #557f92;
+    font-size: 0.9rem;
+}
+/* --FINE ATTIVA NOTIFICHE */
+/* RICERCA CHAT */
 #input-search {
     position: relative;
     margin: 0.15rem;
@@ -195,6 +154,8 @@ main.main {
     transform: translateY(-50%);
     font-size: 1rem;
 }
+/* --FINE RICERCA CHAT */
+/* ELENCO CONTATTI, CLICCABILI PER SELEZIONARE CHAT */
 ul#all-message {
     max-width: var(--header-menu-width);
     overflow-x: hidden;
@@ -205,13 +166,39 @@ ul#all-message {
     gap: 0.5rem;
     display: flex;
     align-items: center;
+    min-height: 85px;
+    border-bottom: 1px solid #c0c3c5;
+}
+.message-container.clicked {
+    background-color: #e9ebeb;
 }
 .message-container img {
     max-height: 85px;
     padding: 0.7rem;
     padding-left: 1rem;
 }
-/* --2: chat-container */
+.message-container .flex-column {
+    align-self: flex-start;
+    padding-top: 0.7rem;
+    max-width: 200px;
+    margin-right: auto;
+}
+.last-msg-txt {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.85rem;
+    color:#c0c3c5;
+}
+.last-msg-date {
+    align-self: flex-start;
+    padding-top: 0.5rem;
+    margin-right: 0.35rem;
+    font-size: 0.8rem;
+    color: #c0c3c5;
+}
+/* --FINE ELENCO CONTATTI */
+/* CHAT CON CONTATTO SELEZIONATO */
 #chat-container {
     display: flex;
     height: calc(100vh - var(--header-height) - 1.5rem *2);
@@ -219,7 +206,42 @@ ul#all-message {
     flex-wrap: wrap;
     min-height: 350px;
 }
-/* hidde-menu...al click sul messaggio compare questo menu che consentirá di eliminare il emssaggio*/
+div.chat-main {
+    background-image: url('../img/mine.jpg');
+    display: flex;
+    height: calc(100% - var(--footer-height));
+    flex-direction: column;
+    padding: 2rem;
+    flex-basis: 100%;
+    overflow-y: auto;
+}
+.msg {
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    margin: 0.5rem;
+    padding: 0.85rem;
+    padding-bottom: 0.15rem;
+    border-radius: 0.7rem;
+    width: calc(50% - .5rem);
+    flex-direction: column;
+}
+.msg.received {
+    align-self: flex-start;
+    background-color: white;
+}
+.msg.sent {
+    align-self: flex-end;
+    background-color: #d5f9ba;
+}
+.msg-date-chat {
+    align-self: flex-end;
+    font-size: 0.8rem;
+    color:#c0c3c5;
+    text-align: right;
+    width: 100%;
+}
+/* hidden-menu...al click sul messaggio compare questo menu che consentirá di eliminare il emssaggio*/
 .hidden-menu {
     position: absolute;
     width: 80%;
@@ -239,42 +261,8 @@ li.hidden-li {
     font-size: 1rem;
     line-height: 3rem;
 }
-
-div.chat-main {
-    background-image: url('../img/mine.jpg');
-    display: flex;
-    height: calc(100% - var(--footer-height));
-    flex-direction: column;
-    padding: 2rem;
-    flex-basis: 100%;
-    overflow-y: auto;
-}
-.msg {
-    margin-right: auto;
-    position: relative;
-    display: flex;
-    margin: 0.5rem;
-    padding: 0.85rem;
-    padding-bottom: 0.15rem;
-    border-radius: 0.7rem;
-    width: 45%;
-    flex-direction: column;
-}
-.msg-date-chat {
-    align-self: flex-end;
-    font-size: 0.8rem;
-    color:#c0c3c5;
-    text-align: right;
-    width: 100%;
-}
-.msg.received {
-    align-self: flex-start;
-    background-color: white;
-}
-.msg.sent {
-    align-self: flex-end;
-    background-color: #d5f9ba;
-}
+/* --FINE CHAT CON CONTATTO SELEZIONATO */
+/* FOOTER: INVIO NUOVO MESSAGGIO */
 footer.chat-footer {
     background-color: #f3eeea;
     height: var(--footer-height);
@@ -296,14 +284,17 @@ footer.chat-footer {
     height: 100%;
     padding-left: 1rem;
 }
+/* --FINE FOOOTER */
 /* --FINE MAIN */
 
 
+
+/* RIDIMENSIONAMENTO PER SCHERMI CON DIMENSIONI INFERIORI A 900PX */
 @media screen and (max-width: 900px) {
     :root {
         --header-menu-width: 250px;
     }
-    .message-container .msg-date{
+    .msg-date{
         margin: 0 auto;
     }
     .message-container {

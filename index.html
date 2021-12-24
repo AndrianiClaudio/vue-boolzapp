@@ -19,14 +19,10 @@
 </head>
 <body>
     <div id="app">
-        <!-- INTESTAZIONE: diviso in due: parte sx e dx: 
-                SX: nome utente collegato, con avatar e icone
-                DX: nome utente selezionato dalla lista contatti,avatar,ultimo accesso, icone(--main SX: ul#all-message) 
-                ...icone: (attualmente senza alcuna funzione)
-            -->
+        <!-- HEADER-->
         <header class="header">
-            <!-- MENU SX -->
-            <!-- <div id= 'header-menu'>
+            <!-- INFORMAZIONI UTENTE COLLEGATO (avatar,nome,icone(attualmente senza funzione)) -->
+            <div id= 'header-menu'>
                 <div class="user-info">
                     <img :src="`IMG/avatar${user.avatar}.jpg`" class="header-avatar" :alt="name_initials(user.name)">
                     <span class='name'>{{user.name}}</span>
@@ -34,20 +30,9 @@
                 <div class="header-icon">
                     <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
-            </div> -->
-            <div id= 'logged-info'>
-                <div class="avatar">
-                    <img :src="`img/avatar${user.avatar}.jpg`" :alt = "name_initials(user.name)">
-                </div>
-                <div class="name">
-                    <span>{{user.name}}</span>
-                </div>
-                <div class="icon">
-                    <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
-                </div>
             </div>
-            <!-- --FINE MENU SX -->
-            <!-- MENU DX -->
+            <!-- --FINE INFORMAZIONI UTENTE COLLEGATO -->
+            <!-- INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI, CON CUI IL COLLEGATO VUOLE CHATTARE -->
             <div id="header-msg-menu">
                 <div class="friend-info">
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
@@ -60,30 +45,30 @@
                     <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
-            <!-- --FINE MENU DX -->
+            <!-- --FINE INFORMAZIONI UTENTE SELEZIONATO DALLA LISTA CONTATTI -->
         </header>
-        <!-- --FINE INTESTAZIONE -->
+        <!-- --FINE HEADER-->
         <main class="main">
-            <!-- lista notifiche, messaggi,cerca o inizia chat -->
+            <!-- NOTIFICHE, RICERCA CHAT, ELENCO CONTATTI SELEZIONABILI-->
             <div id="msg-list-container">
-                <!-- notifiche -->
+                <!-- NOTIFICHE -->
                 <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
                     <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
                     <div class="flex-column">
                         <span>{{main.notificationsContainer.text}}</span>
-                        <span class= 'underline-grey'>{{main.notificationsContainer.activeText}}</span>
+                        <span class= 'notifications-add-text'>{{main.notificationsContainer.activeText}}</span>
                     </div>
                 </div>
-                <!-- cerca chat -->
+                <!-- CERCA UNA CHAT -->
                 <div id="input-search">
                     <input :type="main.input.type" :placeholder="main.input.placeholder" v-model='main.input.value'
                     >
 
                     <i :class="`${main.input.icon.family} ${main.input.icon.prefix}${main.input.icon.name}`"></i>
                 </div>
-                <!-- elenco messaggi -->
+                <!-- ELENCO CONTATTI -->
                 <ul id="all-message">
-                    <!-- mostreremo solo quelle contente il v-model della input -->
+                    <!-- mostreremo solo quelle contenente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
                     v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
@@ -93,12 +78,11 @@
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
                                 <span class="name">{{contact.name}}</span>
-                                <span class='grey-color'>
-                                    <!-- {{contact.messages[contact.messages.length-1].text}} -->
+                                <span class='last-msg-txt'>
                                     {{findLastMessage(index)}}
                                 </span>
                             </div>
-                            <span class="msg-date">
+                            <span class="last-msg-date">
                                 <!-- {{contact.messages[contact.messages.length-1].date}} -->
                                 {{findLastDate(index)}}
                             </span>
@@ -106,36 +90,34 @@
                     </li>
                 </ul>
             </div>
-            <!-- contenuto chat -->
+            <!-- CHAT CON CONTATTO SELEZIONATO -->
             <div id="chat-container">
                 <div class="chat-main">
-                    <!-- stampa messaggi con utente cliccato in lista messaggi -->
+                    <!-- ELENCO MESSAGGI -->
                     <div v-for = '(msg,index) in contacts[clicked].messages' class='msg '  :class = 'msg.status'
                     @click = 'showMenu(index)' v-if = 'msg.saved'>
-                        <div v-if='msg.clicked' class="hidden-menu">
-                            <ul class="hidden-ul">
-                                <li class="hidden-li">
-                                    <span>Message info</span>
-                                </li>
-                                <li class="hidden-li" @click = 'deleteMessage(index)'>
-                                    <span>Delete message</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <span>{{msg.text}}</span>
-                        <span class="msg-date-chat">{{msg.date}}</span>
+                    <div v-if='msg.clicked' class="hidden-menu">
+                        <ul class="hidden-ul">
+                            <li class="hidden-li">
+                                <span>Message info</span>
+                            </li>
+                            <li class="hidden-li" @click = 'deleteMessage(index)'>
+                                <span>Delete message</span>
+                            </li>
+                        </ul>
                     </div>
+                    <span>{{msg.text}}</span>
+                    <span class="msg-date-chat">{{msg.date}}</span>
                 </div>
-                <!-- invio messaggi a utente selezionato -->
-                <footer class="chat-footer">
-                    <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>`
-                    <!-- con il tasto invio dovremo ottenere il valore della input e inserirlo nell'array  -->
-                    <!-- all'invio del messaggio deve partire un timer di un secondo che restituisce un messaggio di risposta dal nostro utente clicked -->
-                    <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder"
-                    @keyup.enter= 'sendMessage($event),receivedTimed()'>
-                    <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
-                </footer>
             </div>
+            <!-- invio messaggi a utente selezionato -->
+            <footer class="chat-footer">
+                <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
+                <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder" v-model = 'main.footer.input.value'
+                @keyup.enter= 'sendMessage($event),receivedTimed()'>
+                <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
+            </footer>
+            <!-- --FINE CHAT CON CONTATTO SELEZIONATO -->
         </main>
     </div>
     <!-- mine js -->

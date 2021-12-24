@@ -18,7 +18,12 @@
 // Milestone 5
 // ● Cancella messaggio: cliccando sul messaggio appare un menu a tendina che
 // permette di cancellare il messaggio selezionato
+
+
+// TO - DO
+// -----------------------------
 // Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
+// -----------------------------
 
 const app = new Vue ({
     el: '#app',
@@ -87,7 +92,7 @@ const app = new Vue ({
                 input: {
                     placeholder: 'Scrivi un messaggio',
                     type: 'text',
-                    // value: '', ... non utilizzata attualmente
+                    value: '', 
                 },
                 icons: [
                     {
@@ -143,14 +148,9 @@ const app = new Vue ({
                 };
                 app.contacts[app.clicked].messages.push(message);
             };
-            // timer di 1 secondo: 1000ms
-            const timeout = 1000;
-            const timerID = setTimeout(message_received, timeout);
+            setTimeout(message_received, 1000);
         },
         visible(i) {
-            // console.log(i,'-----',this.contacts[i].name.indexOf(this.main.input.value));
-            // console.log(this.contacts[i].name, this.contacts[i].name.toLowerCase());
-            // controllo se il valore della input é compreso nel nome del mio contact
             if (this.contacts[i].name.toLowerCase().indexOf(this.main.input.value.toLowerCase()) > -1) {
                 this.contacts[i].visible = true;
             }
@@ -194,7 +194,6 @@ const app = new Vue ({
         }
     },
     created () {
-        // Ecco l’array contacts:
         this.contacts = [
             {
                 name: "Michele",
