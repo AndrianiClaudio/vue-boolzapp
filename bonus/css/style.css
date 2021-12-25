@@ -1,0 +1,315 @@
+:root {
+    --header-height: 75px;
+    --header-menu-width: 470px;
+    --min-menu-width: 400px;
+    --footer-height: 50px;
+}
+/* GENERALI */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: linear-gradient(0.5turn, #009688 25%,#dbdbd2 10%);
+}
+#app {
+    position: relative;
+    width: 80%;
+    margin: 1.5rem auto;
+}
+#header-msg-menu,
+.chat-main,
+.chat-footer{
+    min-width: var(--min-menu-width);
+}
+
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.name {
+    font-size: 1.2rem;
+}
+img {
+    border-radius: 50%;
+}
+/* --FINE GENERALI */
+/* --HEADER */
+header.header {
+    height: var(--header-height);
+    min-width: calc(var(--header-menu-width) + var(--min-menu-width));
+    display: flex;
+    background-color: #eaeaea;
+}
+
+.header-avatar {
+    height: var(--header-height);
+    display: flex;
+    align-items: center; /* gestione alt */
+    padding: 0.6rem;
+}
+/* INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
+#header-menu {
+    display: flex;
+    justify-content: space-between;
+    min-width: var(--header-menu-width);
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    padding-left: 0.35rem;
+}
+.header-icon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+.header-icon > i {
+    color: #b1b1b1;
+}
+/* --FINE INFORMAZIONI RELATIVE ALL' UTENTE CONNESSO */
+/* INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI */
+#header-msg-menu {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    border-left: 2px solid darkgrey;
+}
+.friend-info {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.last-access-date {
+    color: #6b7376;
+    font-size: 0.9rem;
+}
+/* --FINE INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI */
+/* --FINE HEADER */
+/* --MAIN */
+main.main {
+    display: flex;
+}
+/* ATTIVA NOTIFICHE */
+#msg-list-container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: var(--header-menu-width);
+    max-width: var(--header-menu-width);
+    background-color: #fafafa;
+    height: calc(100vh - var(--header-height) - 1.5rem * 2);
+    min-height: 350px;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+#notifications-container {
+    padding: 1rem;
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+#notifications-container.clicked,
+#notifications-container.clicked i {
+    background-color: #8edafc;
+}
+#notifications-container > i {
+    background-color: white;
+    border-radius: 50%;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.notifications-add-text {
+    color: #557f92;
+    text-decoration: underline solid #557f92;
+    font-size: 0.9rem;
+}
+/* --FINE ATTIVA NOTIFICHE */
+/* RICERCA CHAT */
+#input-search {
+    position: relative;
+    margin: 0.15rem;
+}
+#input-search > input {
+    font-size: 0.95rem;
+    width: 100%;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 4rem;
+} 
+#input-search > i {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    color: #b6b9bb;
+    transform: translateY(-50%);
+    font-size: 1rem;
+}
+/* --FINE RICERCA CHAT */
+/* ELENCO CONTATTI, CLICCABILI PER SELEZIONARE CHAT */
+ul#all-message {
+    max-width: var(--header-menu-width);
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+.message-container {
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    min-height: 85px;
+    border-bottom: 1px solid #c0c3c5;
+}
+.message-container.clicked {
+    background-color: #e9ebeb;
+}
+.message-container img {
+    max-height: 85px;
+    padding: 0.7rem;
+    padding-left: 1rem;
+}
+.message-container .flex-column {
+    align-self: flex-start;
+    padding-top: 0.7rem;
+    max-width: 200px;
+    margin-right: auto;
+}
+.last-msg-txt {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.85rem;
+    color:#c0c3c5;
+}
+.last-msg-date {
+    align-self: flex-start;
+    padding-top: 0.5rem;
+    margin-right: 0.35rem;
+    font-size: 0.8rem;
+    color: #c0c3c5;
+}
+/* --FINE ELENCO CONTATTI */
+/* CHAT CON CONTATTO SELEZIONATO */
+#chat-container {
+    display: flex;
+    height: calc(100vh - var(--header-height) - 1.5rem *2);
+    flex-basis: calc(100% - var(--header-menu-width));
+    flex-wrap: wrap;
+    min-height: 350px;
+}
+div.chat-main {
+    background-image: url('../img/mine.jpg');
+    display: flex;
+    height: calc(100% - var(--footer-height));
+    flex-direction: column;
+    padding: 2rem;
+    flex-basis: 100%;
+    overflow-y: auto;
+}
+.msg {
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    margin: 0.5rem;
+    padding: 0.85rem;
+    padding-bottom: 0.15rem;
+    border-radius: 0.7rem;
+    width: calc(50% - .5rem);
+    flex-direction: column;
+}
+.msg.received {
+    align-self: flex-start;
+    background-color: white;
+}
+.msg.sent {
+    align-self: flex-end;
+    background-color: #d5f9ba;
+}
+.msg-date-chat {
+    align-self: flex-end;
+    font-size: 0.8rem;
+    color:#c0c3c5;
+    text-align: right;
+    width: 100%;
+}
+/* hidden-menu...al click sul messaggio compare questo menu che consentirá di eliminare il emssaggio*/
+.hidden-menu {
+    position: absolute;
+    width: 80%;
+    background-color: white;
+    z-index: 100000;
+    top: calc(100% - 0.5rem);
+    right: 0.5rem;
+    padding-left: 1.5rem;
+}
+ul.hidden-ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+li.hidden-li {
+    height: 3rem;
+    font-size: 1rem;
+    line-height: 3rem;
+}
+/* --FINE CHAT CON CONTATTO SELEZIONATO */
+/* FOOTER: INVIO NUOVO MESSAGGIO */
+footer.chat-footer {
+    background-color: #f3eeea;
+    height: var(--footer-height);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2.5rem;
+    gap: 2.5rem;
+}
+.chat-footer > i {
+    font-size: 1.3rem;
+    color: #6b7376;
+    width: 45px;
+    text-align: center;
+}
+.chat-footer > input {
+    border: 0;
+    border-radius: 0.4rem;
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
+}
+/* --FINE FOOOTER */
+/* --FINE MAIN */
+
+
+
+/* RIDIMENSIONAMENTO PER SCHERMI CON DIMENSIONI INFERIORI A 900PX */
+@media screen and (max-width: 900px) {
+    :root {
+        --header-menu-width: 250px;
+    }
+    .msg-date{
+        margin: 0 auto;
+    }
+    .message-container {
+        gap: 0;
+        flex-direction: column;
+    }
+    .message-container .flex-column {
+        padding-top: 0.25rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .message-container img {
+        max-height: 65px;
+        padding: 0.35rem;
+    }
+}

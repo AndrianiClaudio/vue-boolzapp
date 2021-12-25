@@ -31,7 +31,6 @@
                     <span class='name'>{{user.name}}</span>
                 </div>
                 <div class="header-icon">
-                    <a href="bonus/index.html" target="_blank">Bonus</a>
                     <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
@@ -119,7 +118,8 @@
                 <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
                 <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder" v-model = 'main.footer.input.value'
                 @keyup.enter= 'sendMessage(),receivedTimed()'>
-                <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
+                <i v-if='(main.footer.input.value.trim().length == 0)' :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
+                <i v-else :class="`${main.footer.icons[2].family} ${main.footer.icons[2].prefix}${main.footer.icons[2].name}`" @click = 'sendMessage(),receivedTimed()'></i>
             </footer>
             <!-- --FINE CHAT CON CONTATTO SELEZIONATO -->
         </main>
