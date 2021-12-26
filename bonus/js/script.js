@@ -1,14 +1,3 @@
-
-
-// ● predisporre una lista di frasi e / o citazioni da utilizzare al posto della risposta "ok:"
-// quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e
-// utilizzarla come testo del messaggio di risposta del pc
-// ---------------------------------------------------------------------------------------------
-// ● visualizzare nella lista dei contatti l'ultimo messaggio inviato/ricevuto da ciascun
-// contatto
-// ---------------------------------------------------------------------------------------------
-// ● inserire l'orario corretto nei messaggi
-// ---------------------------------------------------------------------------------------------
 // ● sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello
 // stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi
 // mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo
@@ -40,6 +29,15 @@
 const app = new Vue ({
     el: '#app',
     data: {
+        answers: [
+            'Ciao, da quanto tempo! Che cosa mi racconti?',
+            'Oggi il corso inizia alle 9. Mi sono svegliato prima.',
+            'Io e Marco andiamo assieme al concerto dei Beatles.',
+            'Hai preso i regali di natale?',
+            'Bene, tu?',
+            'Siamo andati a vedere la partita di pallavolo di Angela',
+            'Ci beviamo qualcosa tutti assieme in questi giorni?',
+        ],
         user: {},
         contacts: [],
         clicked:0,
@@ -158,10 +156,11 @@ const app = new Vue ({
             }
         },
         receivedTimed() {
+            const txt = this.randomAnswer();
             function message_received () {
                 const message = {
                     date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-                    text: 'ok',
+                    text: txt,
                     status: "received",
                     clicked: false,
                     saved: true,
@@ -169,6 +168,12 @@ const app = new Vue ({
                 app.contacts[app.clicked].messages.push(message);
             };
             setTimeout(message_received, 1000);
+        },
+        randomAnswer() {
+            function rndNum(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            return this.answers[rndNum(0, this.answers.length - 1)];
         },
         visible(i) {
             if (this.contacts[i].name.toLowerCase().indexOf(this.main.input.value.toLowerCase()) > -1) {
@@ -211,7 +216,7 @@ const app = new Vue ({
                 return el.saved == true;
             });
             return (saved.length != 0) ? saved[saved.length - 1].date : '';
-        }
+        },
     },
     created () {
         this.contacts = [
