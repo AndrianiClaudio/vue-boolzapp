@@ -41,7 +41,8 @@
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
                         <span class="name">{{contacts[clicked].name}}</span>
-                        <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
+                        <span v-if = 'contacts[clicked].status == 0' class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access[0]}}</span>
+                        <span v-else class="last-access-date">{{contacts[clicked].last_access[contacts[clicked].status]}}</span>
                     </div>
                 </div>
                 <div class="header-icon">   

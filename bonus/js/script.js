@@ -138,7 +138,7 @@ const app = new Vue ({
         notificationsStatusChange() {
             this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
         },
-        // funzione che prende il testo del messaggio e lo pusha nell'araay messaggi corretto
+        // funzione che prende il testo del messaggio e lo pusha nell'array messaggi corretto
         //devo sapere il contact a cui inviare...
         sendMessage() {
             //trim rimuove gli spazi iniziali e finali
@@ -156,8 +156,8 @@ const app = new Vue ({
             }
         },
         receivedTimed() {
-            const txt = this.randomAnswer();
             function message_received () {
+                const txt = app.randomAnswer();
                 const message = {
                     date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
                     text: txt,
@@ -166,7 +166,10 @@ const app = new Vue ({
                     saved: true,
                 };
                 app.contacts[app.clicked].messages.push(message);
+                app.contacts[app.clicked].status = 2;
             };
+            this.contacts[this.clicked].status = 1;
+            setTimeout(() => { app.contacts[app.clicked].status = 0},2000);
             setTimeout(message_received, 1000);
         },
         randomAnswer() {
@@ -247,7 +250,8 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '21/10/2020 16:15:22',
+                last_access: ['21/10/2020 16:15:22','Sta scrivendo ...','Online'],
+                status: 0,
             },
             {
                 name: "Fabio",
@@ -276,7 +280,8 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '28/03/2020 16:10:32',
+                last_access: ['28/03/2020 16:10:32', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             },
             
             {
@@ -306,7 +311,8 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '28/03/2020 16:15:22',
+                last_access: ['28/03/2020 16:15:22', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             },
             {
                 name: "Luisa",
@@ -342,6 +348,8 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
+                last_access: ['22/10/2020 06:10:22', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             }
         ];
         this.user  = {
