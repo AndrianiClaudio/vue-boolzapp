@@ -46,7 +46,19 @@
                     </div>
                 </div>
                 <div class="header-icon">   
-                    <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
+                    <i v-for='(icon,index) in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'
+                        @click = 'checkIcon(index)'></i>
+
+                    <div v-if='header.iconMenuOpen' class="hidden-menu">
+                        <ul class="hidden-ul">
+                            <li class="hidden-li">
+                                <span @click = 'clearChat'>Clear chat</span>
+                            </li>
+                            <li class="hidden-li" @click='deleteMessage(index)'>
+                                <span>Delete chat</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- --FINE INFORMAZIONI UTENTE SELEZIONATO DALLA LISTA CONTATTI -->
@@ -74,7 +86,7 @@
                 <ul id="all-message">
                     <!-- mostreremo solo quelle contenente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
-                    v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu'>
+                    v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu(),closeIconMenu()'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
                         @click = 'chanceClicked(index)'

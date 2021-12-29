@@ -42,6 +42,7 @@ const app = new Vue ({
         contacts: [],
         clicked:0,
         header: {
+            iconMenuOpen: false,
             headerMenuIcons: [
                 {
                     family: 'fas',
@@ -203,7 +204,7 @@ const app = new Vue ({
         showMenu (i){
             this.hideMenu(i);
             this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
-            
+            this.closeIconMenu();
         },
         deleteMessage(i) {
             this.contacts[this.clicked].messages[i].saved = false;
@@ -220,6 +221,23 @@ const app = new Vue ({
             });
             return (saved.length != 0) ? saved[saved.length - 1].date : '';
         },
+        checkIcon(i) {
+            if(i == 2) {
+                this.header.iconMenuOpen = !this.header.iconMenuOpen;
+                this.hideMenu();
+            }
+        },
+        closeIconMenu () {
+            this.header.iconMenuOpen = false;
+        },
+        clearChat() {
+            if (this.contacts[this.clicked].messages.length > 0) {
+                this.contacts[this.clicked].messages.forEach(el => {
+                   el.saved = false; 
+                });
+                this.closeIconMenu();
+            }
+        }
     },
     created () {
         this.contacts = [
