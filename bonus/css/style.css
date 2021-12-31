@@ -72,6 +72,7 @@ header.header {
     gap: 1rem;
     padding-right: 1rem;
     position: relative;
+    margin-left: auto;
 }
 .header-icon > i {
     display: inline-block;

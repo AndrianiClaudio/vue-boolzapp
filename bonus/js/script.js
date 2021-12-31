@@ -1,16 +1,3 @@
-// ● sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello
-// stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi
-// mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo
-// accesso alle xx:yy" con l'orario corretto
-// ---------------------------------------------------------------------------------------------
-// ● dare la possibilità all'utente di cancellare tutti i messaggi di un contatto o di
-// cancellare l'intera chat con tutti i suoi dati: cliccando sull'icona con i tre pallini in alto a
-// destra, si apre un dropdown menu in cui sono presenti le voci "Elimina messaggi" ed
-// "Elimina chat"; cliccando su di essi si cancellano rispettivamente tutti i messaggi di
-// quel contatto(quindi rimane la conversazione vuota) oppure l'intera chat
-// comprensiva di tutti i dati del contatto oltre che tutti i suoi messaggi(quindi sparisce il
-// contatto anche dalla lista di sinistra)
-// ---------------------------------------------------------------------------------------------
 // ● visualizzare un messaggio di benvenuto che invita l'utente a selezionare un contatto
 // dalla lista per visualizzare i suoi messaggi, anziché attivare di default la prima
 // conversazione
@@ -29,6 +16,8 @@
 const app = new Vue ({
     el: '#app',
     data: {
+        emptyContact: false,
+        deletedChat: 0,
         answers: [
             'Ciao, da quanto tempo! Che cosa mi racconti?',
             'Oggi il corso inizia alle 9. Mi sono svegliato prima.',
@@ -126,7 +115,7 @@ const app = new Vue ({
         },
     },
     methods: {
-        chanceClicked(i) {
+        changeClicked(i) {
             this.clicked = i;
         },
         name_initials (name){
@@ -194,32 +183,35 @@ const app = new Vue ({
                 el.clicked = false;
             });
         },
-        hideMenu(i) {
-            this.contacts[this.clicked].messages.forEach((el,index) => {
-                if(el.clicked && index != i) {
+        showMenu (i){
+            this.contacts[this.clicked].messages.forEach((el, index) => {
+                if (el.clicked && index != i) {
                     el.clicked = false;
                 }
-            }); 
-        },
-        showMenu (i){
-            this.hideMenu(i);
+            });             
             this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
             this.closeIconMenu();
         },
         deleteMessage(i) {
-            this.contacts[this.clicked].messages[i].saved = false;
+            if(this.contacts[this.clicked].messages.length > 0) {
+                this.contacts[this.clicked].messages[i].saved = false;
+            }
         },
         findLastMessage(i) {
-            const saved = this.contacts[i].messages.filter((el)=> {
-                return el.saved==true;
-            });
-            return (saved.length != 0) ? saved[saved.length - 1].text : '';
+            if(this.contacts[i].messages.length > 0) {
+                const saved = this.contacts[i].messages.filter((el)=> {
+                    return el.saved==true;
+                });
+                return (saved.length != 0) ? saved[saved.length - 1].text : '';
+            }
         },
         findLastDate(i) {
-            const saved = this.contacts[i].messages.filter((el) => {
-                return el.saved == true;
-            });
-            return (saved.length != 0) ? saved[saved.length - 1].date : '';
+            if(this.contacts[i].messages.length > 0) {
+                const saved = this.contacts[i].messages.filter((el) => {
+                    return el.saved == true;
+                });
+                return (saved.length != 0) ? saved[saved.length - 1].date : '';
+            }
         },
         checkIcon(i) {
             if(i == 2) {
@@ -237,6 +229,15 @@ const app = new Vue ({
                 });
                 this.closeIconMenu();
             }
+        },
+        deleteChat() {
+            this.contacts[this.clicked].messages.splice(0,this.contacts[this.clicked].messages.length);
+            this.closeIconMenu();
+            this.deletedChat += 1;
+            if(this.deletedChat == this.contacts.length) {
+                this.emptyContact = true;
+            }
+            (this.clicked + 1 >= this.contacts.length) ? this.changeClicked(0) : this.changeClicked(this.clicked + 1);
         }
     },
     created () {

@@ -37,7 +37,7 @@
             <!-- --FINE INFORMAZIONI UTENTE COLLEGATO -->
             <!-- INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI, CON CUI IL COLLEGATO VUOLE CHATTARE -->
             <div id="header-msg-menu">
-                <div class="friend-info">
+                <div class="friend-info" v-if= '!emptyContact'>
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
                         <span class="name">{{contacts[clicked].name}}</span>
@@ -54,8 +54,8 @@
                             <li class="hidden-li">
                                 <span @click = 'clearChat'>Clear chat</span>
                             </li>
-                            <li class="hidden-li" @click='deleteMessage(index)'>
-                                <span>Delete chat</span>
+                            <li class="hidden-li">
+                                <span @click = 'deleteChat'>Delete chat</span>
                             </li>
                         </ul>
                     </div>
@@ -89,7 +89,7 @@
                     v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu(),closeIconMenu()'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
-                        @click = 'chanceClicked(index)'
+                        @click = 'changeClicked(index)'
                         >
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
@@ -112,7 +112,7 @@
                     <!-- ELENCO MESSAGGI -->
                     <div v-for = '(msg,index) in contacts[clicked].messages' class='msg '  :class = 'msg.status'
                     @click = 'showMenu(index)' v-if = 'msg.saved'>
-                    <div v-if='msg.clicked' class="hidden-menu">
+                    <div v-if='msg.clicked ' class="hidden-menu">
                         <ul class="hidden-ul">
                             <li class="hidden-li">
                                 <span>Message info</span>
