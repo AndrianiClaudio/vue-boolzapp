@@ -319,6 +319,9 @@ footer.chat-footer {
     :root {
         --header-menu-width: 250px;
     }
+    .last-msg-date {
+        margin: auto;
+    }
     .msg-date{
         margin: 0 auto;
     }

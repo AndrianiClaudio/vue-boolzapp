@@ -142,6 +142,7 @@ const app = new Vue ({
                     saved: true,
                 };
                 this.contacts[this.clicked].messages.push(message);
+                this.contacts[this.clicked].last_access[0] = 'oggi alle ' + dayjs().format('HH:mm:ss');
                 this.main.footer.input.value = '';
             }
         },
