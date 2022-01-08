@@ -16,7 +16,7 @@
 const app = new Vue ({
     el: '#app',
     data: {
-        emptyContact: false,
+        // emptyContact: false,
         deletedChat: 0,
         answers: [
             'Ciao, da quanto tempo! Che cosa mi racconti?',
@@ -115,9 +115,7 @@ const app = new Vue ({
         },
     },
     methods: {
-        changeClicked(i) {
-            this.clicked = i;
-        },
+
         name_initials (name){
             const initials = [];
             name.split(' ').forEach(el => {
@@ -231,19 +229,33 @@ const app = new Vue ({
                 this.closeIconMenu();
             }
         },
+        changeClicked(i) {
+            this.clicked = i;
+        },
+        findFirstIndexVisible() {
+            const visible = [];
+            this.contacts.map(((el, index) => {
+            if (!el.emptyContact) {
+                    visible.push(index);
+                }
+            }));
+            console.log(visible);
+            this.clicked = visible [0];
+        },
         deleteChat() {
             this.contacts[this.clicked].messages.splice(0,this.contacts[this.clicked].messages.length);
             this.closeIconMenu();
             this.deletedChat += 1;
-            if(this.deletedChat == this.contacts.length) {
-                this.emptyContact = true;
-            }
-            (this.clicked + 1 >= this.contacts.length) ? this.changeClicked(0) : this.changeClicked(this.clicked + 1);
+            this.contacts[this.clicked].emptyContact = true;
+            // (this.clicked + 1 >= this.contacts.length) ? console.log('--1') : this.changeClicked(this.clicked + 1);
+            (this.clicked + 1 >= this.contacts.length) ? this.findFirstIndexVisible() : this.changeClicked(this.clicked + 1);
         }
     },
     created () {
         this.contacts = [
             {
+
+                emptyContact: false,
                 name: "Michele",
                 avatar: "_1",
                 visible: true,
@@ -274,6 +286,7 @@ const app = new Vue ({
                 status: 0,
             },
             {
+                emptyContact: false,
                 name: "Fabio",
                 avatar: "_2",
                 visible: true,
@@ -305,6 +318,7 @@ const app = new Vue ({
             },
             
             {
+                emptyContact: false,
                 name: "Samuele",
                 avatar: "_3",
                 visible: true,
@@ -335,6 +349,7 @@ const app = new Vue ({
                 status: 0,
             },
             {
+                emptyContact: false,
                 name: "Luisa",
                 avatar: "_4",
                 visible: true,

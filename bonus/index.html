@@ -37,7 +37,7 @@
             <!-- --FINE INFORMAZIONI UTENTE COLLEGATO -->
             <!-- INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI, CON CUI IL COLLEGATO VUOLE CHATTARE -->
             <div id="header-msg-menu">
-                <div class="friend-info" v-if= '!emptyContact'>
+                <div class="friend-info" v-if= '!contacts[clicked].emptyContact'>
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
                         <span class="name">{{contacts[clicked].name}}</span>
@@ -66,7 +66,7 @@
         <!-- --FINE HEADER-->
         <main class="main">
             <!-- NOTIFICHE, RICERCA CHAT, ELENCO CONTATTI SELEZIONABILI-->
-            <div id="msg-list-container">
+            <div id="msg-list-container" >
                 <!-- NOTIFICHE -->
                 <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
                     <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
