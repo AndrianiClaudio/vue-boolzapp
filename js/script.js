@@ -1,32 +1,37 @@
-// Milestone 1
-// Replica della grafica con la possibilità di avere messaggi scritti dall’utente(verdi) e dall’interlocutore(bianco) assegnando due classi CSS diverse
-// Visualizzazione dinamica della lista contatti: tramite la direttiva v -for, visualizzare nome e immagine di ogni contatto
-// Ecco l’array contacts:
+// ● visualizzare un messaggio di benvenuto che invita l'utente a selezionare un contatto
+// dalla lista per visualizzare i suoi messaggi, anziché attivare di default la prima
+// conversazione
+// ---------------------------------------------------------------------------------------------
+// ● aggiungere una splash page visibile per 1s all'apertura dell'app
+// ---------------------------------------------------------------------------------------------
+// ● aggiungere un'icona per cambiare la modalità light/dark
+// ---------------------------------------------------------------------------------------------
+// ● aggiungere un'icona per ingrandire o rimpicciolire il font
+// ---------------------------------------------------------------------------------------------
 
 
-// Milestone 2
-// Visualizzazione dinamica dei messaggi: tramite la direttiva v -for, visualizzare tutti i messaggi relativi al contatto attivo all’interno del pannello della conversazione
-// Click sul contatto mostra la conversazione del contatto cliccato
-
-// Milestone 3
-// Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
-// Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
-
-// Milestone 4
-// Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite(es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
-
-// Milestone 5
-// ● Cancella messaggio: cliccando sul messaggio appare un menu a tendina che
-// permette di cancellare il messaggio selezionato
-// Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
-
+// ● evitare che l'utente possa inviare un messaggio vuoto o composto solamente da
+// spazi
+// ---------------------------------------------------------------------------------------------
 const app = new Vue ({
     el: '#app',
     data: {
+        // emptyContact: false,
+        deletedChat: 0,
+        answers: [
+            'Ciao, da quanto tempo! Che cosa mi racconti?',
+            'Oggi il corso inizia alle 9. Mi sono svegliato prima.',
+            'Io e Marco andiamo assieme al concerto dei Beatles.',
+            'Hai preso i regali di natale?',
+            'Bene, tu?',
+            'Siamo andati a vedere la partita di pallavolo di Angela',
+            'Ci beviamo qualcosa tutti assieme in questi giorni?',
+        ],
         user: {},
         contacts: [],
         clicked:0,
         header: {
+            iconMenuOpen: false,
             headerMenuIcons: [
                 {
                     family: 'fas',
@@ -99,15 +104,18 @@ const app = new Vue ({
                         family: 'fas',
                         prefix: 'fa-',
                         name: 'microphone',
-                    }
+                    },
+                    {
+                        family: 'fas',
+                        prefix: 'fa-',
+                        name: 'plane',
+                    },
                 ]
             }
         },
     },
     methods: {
-        chanceClicked(i) {
-            this.clicked = i;
-        },
+
         name_initials (name){
             const initials = [];
             name.split(' ').forEach(el => {
@@ -118,32 +126,46 @@ const app = new Vue ({
         notificationsStatusChange() {
             this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
         },
-        // funzione che prende il testo del messaggio e lo pusha nell'araay messaggi corretto
+        // funzione che prende il testo del messaggio e lo pusha nell'array messaggi corretto
         //devo sapere il contact a cui inviare...
         sendMessage() {
-            const message = {
-                date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-                text: this.main.footer.value,
-                status: "sent",
-                clicked:false,
-                saved: true,
-            };
-            this.contacts[this.clicked].messages.push(message);
-            // reset input value: dopo aver inviato un messaggio, cancello il suo contenuto dalla input
-            this.main.footer.value = '';
+            //trim rimuove gli spazi iniziali e finali
+            this.main.footer.input.value = this.main.footer.input.value.trim();
+            if (this.main.footer.input.value.length > 0) {
+                const message = {
+                    date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                    text: this.main.footer.input.value,
+                    status: "sent",
+                    clicked: false,
+                    saved: true,
+                };
+                this.contacts[this.clicked].messages.push(message);
+                this.contacts[this.clicked].last_access[0] = 'oggi alle ' + dayjs().format('HH:mm:ss');
+                this.main.footer.input.value = '';
+            }
         },
         receivedTimed() {
             function message_received () {
+                const txt = app.randomAnswer();
                 const message = {
                     date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-                    text: 'ok',
+                    text: txt,
                     status: "received",
                     clicked: false,
                     saved: true,
                 };
                 app.contacts[app.clicked].messages.push(message);
+                app.contacts[app.clicked].status = 2;
             };
+            this.contacts[this.clicked].status = 1;
+            setTimeout(() => { app.contacts[app.clicked].status = 0},2000);
             setTimeout(message_received, 1000);
+        },
+        randomAnswer() {
+            function rndNum(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            return this.answers[rndNum(0, this.answers.length - 1)];
         },
         visible(i) {
             if (this.contacts[i].name.toLowerCase().indexOf(this.main.input.value.toLowerCase()) > -1) {
@@ -160,37 +182,80 @@ const app = new Vue ({
                 el.clicked = false;
             });
         },
-        hideMenu(i) {
-            this.contacts[this.clicked].messages.forEach((el,index) => {
-                if(el.clicked && index != i) {
+        showMenu (i){
+            this.contacts[this.clicked].messages.forEach((el, index) => {
+                if (el.clicked && index != i) {
                     el.clicked = false;
                 }
-            }); 
-        },
-        showMenu (i){
-            this.hideMenu(i);
+            });             
             this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
-            
+            this.closeIconMenu();
         },
         deleteMessage(i) {
-            this.contacts[this.clicked].messages[i].saved = false;
+            if(this.contacts[this.clicked].messages.length > 0) {
+                this.contacts[this.clicked].messages[i].saved = false;
+            }
         },
         findLastMessage(i) {
-            const saved = this.contacts[i].messages.filter((el)=> {
-                return el.saved==true;
-            });
-            return (saved.length != 0) ? saved[saved.length - 1].text : '';
+            if(this.contacts[i].messages.length > 0) {
+                const saved = this.contacts[i].messages.filter((el)=> {
+                    return el.saved==true;
+                });
+                return (saved.length != 0) ? saved[saved.length - 1].text : '';
+            }
         },
         findLastDate(i) {
-            const saved = this.contacts[i].messages.filter((el) => {
-                return el.saved == true;
-            });
-            return (saved.length != 0) ? saved[saved.length - 1].date : '';
+            if(this.contacts[i].messages.length > 0) {
+                const saved = this.contacts[i].messages.filter((el) => {
+                    return el.saved == true;
+                });
+                return (saved.length != 0) ? saved[saved.length - 1].date : '';
+            }
+        },
+        checkIcon(i) {
+            if(i == 2) {
+                this.header.iconMenuOpen = !this.header.iconMenuOpen;
+                this.hideMenu();
+            }
+        },
+        closeIconMenu () {
+            this.header.iconMenuOpen = false;
+        },
+        clearChat() {
+            if (this.contacts[this.clicked].messages.length > 0) {
+                this.contacts[this.clicked].messages.forEach(el => {
+                   el.saved = false; 
+                });
+                this.closeIconMenu();
+            }
+        },
+        changeClicked(i) {
+            this.clicked = i;
+        },
+        findFirstIndexVisible() {
+            const visible = [];
+            this.contacts.map(((el, index) => {
+            if (!el.emptyContact) {
+                    visible.push(index);
+                }
+            }));
+            console.log(visible);
+            this.clicked = visible [0];
+        },
+        deleteChat() {
+            this.contacts[this.clicked].messages.splice(0,this.contacts[this.clicked].messages.length);
+            this.closeIconMenu();
+            this.deletedChat += 1;
+            this.contacts[this.clicked].emptyContact = true;
+            // (this.clicked + 1 >= this.contacts.length) ? console.log('--1') : this.changeClicked(this.clicked + 1);
+            (this.clicked + 1 >= this.contacts.length) ? this.findFirstIndexVisible() : this.changeClicked(this.clicked + 1);
         }
     },
     created () {
         this.contacts = [
             {
+
+                emptyContact: false,
                 name: "Michele",
                 avatar: "_1",
                 visible: true,
@@ -217,9 +282,11 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '21/10/2020 16:15:22',
+                last_access: ['21/10/2020 16:15:22','Sta scrivendo ...','Online'],
+                status: 0,
             },
             {
+                emptyContact: false,
                 name: "Fabio",
                 avatar: "_2",
                 visible: true,
@@ -246,10 +313,12 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '28/03/2020 16:10:32',
+                last_access: ['28/03/2020 16:10:32', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             },
             
             {
+                emptyContact: false,
                 name: "Samuele",
                 avatar: "_3",
                 visible: true,
@@ -276,9 +345,11 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
-                last_access: '28/03/2020 16:15:22',
+                last_access: ['28/03/2020 16:15:22', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             },
             {
+                emptyContact: false,
                 name: "Luisa",
                 avatar: "_4",
                 visible: true,
@@ -312,6 +383,8 @@ const app = new Vue ({
                         saved: true,
                     },
                 ],
+                last_access: ['22/10/2020 06:10:22', 'Sta scrivendo ...', 'Online'],
+                status: 0,
             }
         ];
         this.user  = {

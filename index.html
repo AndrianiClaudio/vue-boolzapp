@@ -31,22 +31,34 @@
                     <span class='name'>{{user.name}}</span>
                 </div>
                 <div class="header-icon">
-                    <a href="bonus/index.html" target="_blank">Bonus</a>
                     <i v-for= 'icon in header.headerMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
                 </div>
             </div>
             <!-- --FINE INFORMAZIONI UTENTE COLLEGATO -->
             <!-- INFORMAZIONI UTENTE,SELEZIONATO DALLA LISTA CONTATTI, CON CUI IL COLLEGATO VUOLE CHATTARE -->
             <div id="header-msg-menu">
-                <div class="friend-info">
+                <div class="friend-info" v-if= '!contacts[clicked].emptyContact'>
                     <img :src="`IMG/avatar${contacts[clicked].avatar}.jpg`" class="header-avatar" :alt="name_initials(contacts[clicked].name)">
                     <div class="flex-column">
                         <span class="name">{{contacts[clicked].name}}</span>
-                        <span class="last-access-date">Ultimo accesso oggi alle {{contacts[clicked].last_access}}</span>
+                        <span v-if = 'contacts[clicked].status == 0' class="last-access-date">Ultimo accesso {{contacts[clicked].last_access[0]}}</span>
+                        <span v-else class="last-access-date">{{contacts[clicked].last_access[contacts[clicked].status]}}</span>
                     </div>
                 </div>
                 <div class="header-icon">   
-                    <i v-for='icon in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'></i>
+                    <i v-for='(icon,index) in header.headerMsgMenuIcons' :class='`${icon.family} ${icon.prefix}${icon.name}`'
+                        @click = 'checkIcon(index)'></i>
+
+                    <div v-if='header.iconMenuOpen' class="hidden-menu">
+                        <ul class="hidden-ul">
+                            <li class="hidden-li">
+                                <span @click = 'clearChat'>Clear chat</span>
+                            </li>
+                            <li class="hidden-li">
+                                <span @click = 'deleteChat'>Delete chat</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- --FINE INFORMAZIONI UTENTE SELEZIONATO DALLA LISTA CONTATTI -->
@@ -54,7 +66,7 @@
         <!-- --FINE HEADER-->
         <main class="main">
             <!-- NOTIFICHE, RICERCA CHAT, ELENCO CONTATTI SELEZIONABILI-->
-            <div id="msg-list-container">
+            <div id="msg-list-container" >
                 <!-- NOTIFICHE -->
                 <div id="notifications-container" :class="{clicked: main.notificationsContainer.clicked}" @click = 'notificationsStatusChange'>
                     <i :class='`${main.notificationsContainer.icon.family} ${main.notificationsContainer.icon.prefix}${main.notificationsContainer.icon.name}`'></i>
@@ -74,10 +86,10 @@
                 <ul id="all-message">
                     <!-- mostreremo solo quelle contenente il v-model della input -->
                     <li v-for = '(contact,index) in contacts'
-                    v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu'>
+                    v-if='visible(index) && contact.messages.length > 0' @click = 'hideMenu(),closeIconMenu()'>
                         <!-- visualizza solo se contact.visible risulta true (ricercando parola diversa da nome: visible passa a false) -->
                         <div class="message-container" :class= '{clicked: (index == clicked)}'
-                        @click = 'chanceClicked(index)'
+                        @click = 'changeClicked(index)'
                         >
                             <img :src="`img/avatar${contact.avatar}.jpg`" :alt="name_initials(contact.name)">
                             <div class="flex-column">
@@ -100,7 +112,7 @@
                     <!-- ELENCO MESSAGGI -->
                     <div v-for = '(msg,index) in contacts[clicked].messages' class='msg '  :class = 'msg.status'
                     @click = 'showMenu(index)' v-if = 'msg.saved'>
-                    <div v-if='msg.clicked' class="hidden-menu">
+                    <div v-if='msg.clicked ' class="hidden-menu">
                         <ul class="hidden-ul">
                             <li class="hidden-li">
                                 <span>Message info</span>
@@ -119,7 +131,8 @@
                 <i :class="`${main.footer.icons[0].family} ${main.footer.icons[0].prefix}${main.footer.icons[0].name}`"></i>
                 <input :type="main.footer.input.type" :placeholder="main.footer.input.placeholder" v-model = 'main.footer.input.value'
                 @keyup.enter= 'sendMessage(),receivedTimed()'>
-                <i :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
+                <i v-if='(main.footer.input.value.trim().length == 0)' :class="`${main.footer.icons[1].family} ${main.footer.icons[1].prefix}${main.footer.icons[1].name}`"></i>
+                <i v-else :class="`${main.footer.icons[2].family} ${main.footer.icons[2].prefix}${main.footer.icons[2].name}`" @click = 'sendMessage(),receivedTimed()'></i>
             </footer>
             <!-- --FINE CHAT CON CONTATTO SELEZIONATO -->
         </main>
