@@ -17,7 +17,7 @@ const app = new Vue ({
     el: '#app',
     data: {
         // emptyContact: false,
-        deletedChat: 0,
+        // deletedChat: 0,
         answers: [
             'Ciao, da quanto tempo! Che cosa mi racconti?',
             'Oggi il corso inizia alle 9. Mi sono svegliato prima.',
@@ -28,7 +28,11 @@ const app = new Vue ({
             'Ci beviamo qualcosa tutti assieme in questi giorni?',
         ],
         user: {},
-        contacts: [],
+        contacts: {
+            visible: [],
+            deleted: [],
+            // tmpInputSearch: [],
+        },
         clicked:0,
         header: {
             iconMenuOpen: false,
@@ -116,6 +120,11 @@ const app = new Vue ({
     },
     methods: {
 
+        /**
+         * 
+         * @param {*} name 
+         * @returns Array $name: Iniziali di Name
+         */
         name_initials (name){
             const initials = [];
             name.split(' ').forEach(el => {
@@ -123,11 +132,17 @@ const app = new Vue ({
             });
             return initials;
         },
+
+        /**
+         * Modifica lo status di notification container 
+         */
         notificationsStatusChange() {
             this.main.notificationsContainer.clicked = !this.main.notificationsContainer.clicked;
         },
-        // funzione che prende il testo del messaggio e lo pusha nell'array messaggi corretto
-        //devo sapere il contact a cui inviare...
+
+        /**
+         * funzione che prende il testo del messaggio e lo pusha nell'array messaggi corretto
+         */
         sendMessage() {
             //trim rimuove gli spazi iniziali e finali
             this.main.footer.input.value = this.main.footer.input.value.trim();
@@ -139,11 +154,16 @@ const app = new Vue ({
                     clicked: false,
                     saved: true,
                 };
-                this.contacts[this.clicked].messages.push(message);
-                this.contacts[this.clicked].last_access[0] = 'oggi alle ' + dayjs().format('HH:mm:ss');
+                this.contacts.visible[this.clicked].messages.push(message);
+                this.contacts.visible[this.clicked].last_access[0] = 'oggi alle ' + dayjs().format('HH:mm:ss');
+                
                 this.main.footer.input.value = '';
             }
         },
+
+        /**
+         * Genera una risposta automatica
+         */
         receivedTimed() {
             function message_received () {
                 const txt = app.randomAnswer();
@@ -154,59 +174,64 @@ const app = new Vue ({
                     clicked: false,
                     saved: true,
                 };
-                app.contacts[app.clicked].messages.push(message);
-                app.contacts[app.clicked].status = 2;
+                app.contacts.visible[app.clicked].messages.push(message);
+                app.contacts.visible[app.clicked].status = 2;
             };
-            this.contacts[this.clicked].status = 1;
-            setTimeout(() => { app.contacts[app.clicked].status = 0},2000);
+            this.contacts.visible[this.clicked].status = 1;
+            
+            setTimeout(() => { app.contacts.visible[app.clicked].status = 0},2000);
             setTimeout(message_received, 1000);
         },
+
+        /**
+         * 
+         * @returns random answer
+         */
         randomAnswer() {
             function rndNum(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
             return this.answers[rndNum(0, this.answers.length - 1)];
         },
-        visible(i) {
-            if (this.contacts[i].name.toLowerCase().indexOf(this.main.input.value.toLowerCase()) > -1) {
-                this.contacts[i].visible = true;
-            }
-             else {
-                this.contacts[i].visible = false;
-            }
-            return this.contacts[i].visible;
-        },
-        // reset di tutti i menu
+
+        /**
+         * Reset all menu
+         */
         hideMenu() {
-            this.contacts[this.clicked].messages.forEach(el => {
+            this.contacts.visible[this.clicked].messages.forEach(el => {
                 el.clicked = false;
             });
         },
+        // Show Menu
         showMenu (i){
-            this.contacts[this.clicked].messages.forEach((el, index) => {
+            this.contacts.visible[this.clicked].messages.forEach((el, index) => {
                 if (el.clicked && index != i) {
                     el.clicked = false;
                 }
             });             
-            this.contacts[this.clicked].messages[i].clicked = !this.contacts[this.clicked].messages[i].clicked;
+            this.contacts.visible[this.clicked].messages[i].clicked = !this.contacts.visible[this.clicked].messages[i].clicked;
             this.closeIconMenu();
         },
+
+        // Delete a message
         deleteMessage(i) {
-            if(this.contacts[this.clicked].messages.length > 0) {
-                this.contacts[this.clicked].messages[i].saved = false;
+            if(this.contacts.visible[this.clicked].messages.length > 0) {
+                this.contacts.visible[this.clicked].messages[i].saved = false;
             }
         },
+
+        // Return last message
         findLastMessage(i) {
-            if(this.contacts[i].messages.length > 0) {
-                const saved = this.contacts[i].messages.filter((el)=> {
+            if(this.contacts.visible[i].messages.length > 0) {
+                const saved = this.contacts.visible[i].messages.filter((el)=> {
                     return el.saved==true;
                 });
                 return (saved.length != 0) ? saved[saved.length - 1].text : '';
             }
         },
         findLastDate(i) {
-            if(this.contacts[i].messages.length > 0) {
-                const saved = this.contacts[i].messages.filter((el) => {
+            if(this.contacts.visible[i].messages.length > 0) {
+                const saved = this.contacts.visible[i].messages.filter((el) => {
                     return el.saved == true;
                 });
                 return (saved.length != 0) ? saved[saved.length - 1].date : '';
@@ -222,43 +247,82 @@ const app = new Vue ({
             this.header.iconMenuOpen = false;
         },
         clearChat() {
-            if (this.contacts[this.clicked].messages.length > 0) {
-                this.contacts[this.clicked].messages.forEach(el => {
+            if (this.contacts.visible[this.clicked].messages.length > 0) {
+                this.contacts.visible[this.clicked].messages.forEach(el => {
                    el.saved = false; 
                 });
                 this.closeIconMenu();
             }
         },
         changeClicked(i) {
-            this.clicked = i;
+            if(this.contacts.visible.length === 0) {
+                this.clicked = 0;
+            } else {
+
+                this.clicked = i;
+            }
         },
         findFirstIndexVisible() {
             const visible = [];
-            this.contacts.map(((el, index) => {
-            if (!el.emptyContact) {
-                    visible.push(index);
-                }
+            this.contacts.visible.map(((el, index) => {
+                visible.push(index);
             }));
-            console.log(visible);
             this.clicked = visible [0];
         },
         deleteChat() {
-            this.contacts[this.clicked].messages.splice(0,this.contacts[this.clicked].messages.length);
             this.closeIconMenu();
-            this.deletedChat += 1;
-            this.contacts[this.clicked].emptyContact = true;
-            // (this.clicked + 1 >= this.contacts.length) ? console.log('--1') : this.changeClicked(this.clicked + 1);
-            (this.clicked + 1 >= this.contacts.length) ? this.findFirstIndexVisible() : this.changeClicked(this.clicked + 1);
+
+            this.contacts.visible[this.clicked].messages.splice(0,this.contacts.visible[this.clicked].messages.length);
+            
+            this.contacts.deleted.push(this.contacts.visible[this.clicked]);
+            this.contacts.visible.splice(this.clicked,1);
+            
+        },
+        // TROVA UN CONTATTO AL CLICK SU INPUT-SEARCH
+        searchContact (){
+            this.closeIconMenu();
+            const tmp = [];
+
+            if(this.main.input.value.trim() !== '') {
+                this.contacts.deleted.forEach(function (el) {
+                        tmp.push(el);
+                    });
+                this.contacts.visible.forEach(function (el) {
+                        tmp.push(el);
+                    });
+
+                this.contacts.visible.splice(0,this.contacts.visible.length);
+                this.contacts.deleted.splice(0,this.contacts.deleted.length);
+                
+                console.log();
+                tmp.forEach((el) => {
+                    el.name.toLowerCase().includes(this.main.input.value.toLowerCase().trim()) ? this.contacts.visible.push(el) : this.contacts.deleted.push(el);
+                });
+                this.clicked = 0;
+            } else {
+                const tmp = this.contacts.deleted;
+                while(this.contacts.deleted.length > 0) {
+                    tmp.forEach((el,index) => {
+                            if(el.messages.length > 0) {
+                                this.contacts.visible.push(el);
+                            };
+                            this.contacts.deleted.splice(index,1);
+                    });
+                }
+                this.clicked = 0;
+            }
         }
     },
+    // POPOLAMENTO DA FAKE DB
     created () {
-        this.contacts = [
+        // CONTATTI
+        this.contacts.visible = [
             {
 
-                emptyContact: false,
+                // emptyContact: false,
                 name: "Michele",
                 avatar: "_1",
-                visible: true,
+                // visible: true,
                 messages: [
                     {
                         date: "10/01/2020 15:30:55",
@@ -286,10 +350,10 @@ const app = new Vue ({
                 status: 0,
             },
             {
-                emptyContact: false,
+                // emptyContact: false,
                 name: "Fabio",
                 avatar: "_2",
-                visible: true,
+                // visible: true,
                 messages: [
                     {
                         date: "20/03/2020 16:30:00",
@@ -318,10 +382,10 @@ const app = new Vue ({
             },
             
             {
-                emptyContact: false,
+                // emptyContact: false,
                 name: "Samuele",
                 avatar: "_3",
-                visible: true,
+                // visible: true,
                 messages: [
                     {
                         date: "28/03/2020 10:10:40",
@@ -349,10 +413,10 @@ const app = new Vue ({
                 status: 0,
             },
             {
-                emptyContact: false,
+                // emptyContact: false,
                 name: "Luisa",
                 avatar: "_4",
-                visible: true,
+                // visible: true,
                 messages: [
                     {
                         date: "10/01/2020 15:30:55",
@@ -387,6 +451,7 @@ const app = new Vue ({
                 status: 0,
             }
         ];
+        // UTENTE CONNESSO
         this.user  = {
             name: 'Claudio',
             avatar: '_5',

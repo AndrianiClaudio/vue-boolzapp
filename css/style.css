@@ -28,6 +28,9 @@ body {
     min-width: var(--min-menu-width);
 }
 
+i {
+    cursor: pointer;
+}
 
 .flex-column {
     display: flex;
@@ -100,6 +103,7 @@ header.header {
     align-items: center;
     gap: 0.35rem;
 }
+
 .last-access-date {
     color: #6b7376;
     font-size: 0.9rem;
@@ -128,6 +132,7 @@ main.main {
     gap: 0.5rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 #notifications-container.clicked,
 #notifications-container.clicked i {
@@ -147,23 +152,35 @@ main.main {
 /* --FINE ATTIVA NOTIFICHE */
 /* RICERCA CHAT */
 #input-search {
-    position: relative;
-    margin: 0.15rem;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    width: calc(100% - .5rem * 2);
+    margin: 0 .5rem;
+    padding: 0 1rem;
 }
 #input-search > input {
-    font-size: 0.95rem;
     width: 100%;
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
-    padding-left: 4rem;
-} 
+    margin: 0 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    border: 0;
+    border-bottom: 2px solid #009688;
+    outline: 0;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #393939;
+}
+
 #input-search > i {
-    position: absolute;
-    top: 50%;
-    left: 1.5rem;
     color: #b6b9bb;
-    transform: translateY(-50%);
-    font-size: 1rem;
+    font-size: 1.25rem;
+    padding: .3rem 1rem;
+}
+#input-search > i:hover {
+    background-color: #009688;
+    color: white;
 }
 /* --FINE RICERCA CHAT */
 /* ELENCO CONTATTI, CLICCABILI PER SELEZIONARE CHAT */
@@ -225,6 +242,12 @@ div.chat-main {
     padding: 2rem;
     flex-basis: 100%;
     overflow-y: auto;
+}
+.h-100 {
+    height: calc(100% - var(--footer-height));
+    width: 100%;
+    /* background-color: black; */
+    background-image: url('../img/mine.jpg');
 }
 .msg {
     margin-right: auto;
